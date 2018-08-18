@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { Router } from '@angular/router';
 import { Room } from '../room';
 import { RoomService } from '../room.service';
 
@@ -12,11 +12,13 @@ import { RoomService } from '../room.service';
 })
 export class HotelRoomsComponent implements OnInit {
   room: Room;
+  id = +this.route.snapshot.paramMap.get('id');
 
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -24,12 +26,15 @@ export class HotelRoomsComponent implements OnInit {
   }
 
   getRoom(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.roomService.getRoom(id)
+    this.roomService.getRoom(this.id)
       .subscribe(room => this.room = room);
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  btnClick(): void {
+    this.router.navigateByUrl(`/order/${this.id}`)
   }
 }
