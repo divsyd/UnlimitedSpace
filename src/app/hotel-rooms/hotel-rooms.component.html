@@ -1,3 +1,13 @@
-<p>
-  hotel-rooms works!
-</p>
+<div *ngIf="room">
+  <h2>{{room.name}} Details</h2>
+  <div>Room id: {{room.id}}</div>
+  <div>name: {{room.name}}</div>
+  <div>Max number of guests: {{room.maxGuest}}</div>
+  <div>Number of rooms: {{room.rooms}}</div>
+  <div>
+    <button>Reserve</button>
+  </div>
+  <div>
+    <button (click)="goBack()">go back</button>
+  </div>
+</div>

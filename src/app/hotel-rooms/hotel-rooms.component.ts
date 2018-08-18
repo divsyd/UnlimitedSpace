@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { Room } from '../room';
+import { RoomService } from '../room.service';
 
 @Component({
   selector: 'app-hotel-rooms',
@@ -6,10 +11,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hotel-rooms.component.css']
 })
 export class HotelRoomsComponent implements OnInit {
+  room: Room;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private roomService: RoomService,
+    private location: Location
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getRoom();
   }
 
+  getRoom(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.roomService.getRoom(id)
+      .subscribe(room => this.room = room);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }
