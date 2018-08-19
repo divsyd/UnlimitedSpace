@@ -1,13 +1,15 @@
-<div *ngIf="room">
-  <h2>{{room.name}} Details</h2>
-  <div>Room id: {{room.id}}</div>
-  <div>name: {{room.name}}</div>
-  <div>Max number of guests: {{room.maxGuest}}</div>
-  <div>Number of rooms: {{room.rooms}}</div>
-  <div>
-    <button type="button" (click)="btnClick();">Order</button>
+<div class="container">
+  <div class="row">
+    <div *ngIf="room">
+      <h2>{{room.name}} Details</h2>
+      <div>Room id: {{room.id}}</div>
+      <div>name: {{room.name}}</div>
+      <div>Max number of guests: {{room.maxGuest}}</div>
+      <div>Number of rooms: {{room.rooms}}</div>
+    </div>
   </div>
-  <div>
-    <button (click)="goBack()">go back</button>
+    <div class="row d-flex justify-content-center">
+      <button type="button" class="btn btn-primary space_button" (click)="btnClick();">Order</button>
+      <button class="btn btn-danger space_button"(click)="goBack()" >go back</button>
+    </div>
   </div>
-</div>

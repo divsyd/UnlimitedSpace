@@ -31,7 +31,7 @@ export class HotelRoomsComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigateByUrl("")
   }
 
   btnClick(): void {
