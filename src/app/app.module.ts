@@ -7,6 +7,7 @@ import { HotelRoomsComponent } from './hotel-rooms/hotel-rooms.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { OrdersComponent } from './orders/orders.component';
     HotelsComponent,
     HotelRoomsComponent,
     LoginComponent,
-    OrdersComponent
+    OrdersComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

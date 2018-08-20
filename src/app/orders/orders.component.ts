@@ -19,8 +19,8 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
   }
 
-  btnClick(): void{
-    this.router.navigateByUrl(`/rooms/${this.id}`)
+  btnClick(): void {
+    this.router.navigateByUrl(``);
   }
 
 }
