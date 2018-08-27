@@ -1,27 +1,58 @@
 # UnlimitedSpace
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.3.
+## Key code style and design principles
 
-## Development server
+- Weapons of choice... We are building a MEAN app!
+	- Frontend should be done in Angular.
+	- Database should be MongoDB.
+	- Server should be ExpressJS.
+	- Mongoose ODM should be used for object modelling with MongoDB.
+- Maintain consistency in layout
+	- Use standard naming convention for variables and classes. e.g. PascalCase for classes, UPPERCASE for const and camelCase for viarables.
+	- Use line indentation for easy reading of code. Leave a space after closing classes or functions.
+	- Keep lines under 120 characters wide.
+	- Avoid trailing spaces. One or two lines to break up code for readability is preferred
+- Documentation and comments
+	- All variables should be descriptive. Avoid using things like x.
+	- If the code isn't obvious on what it is doing, add inline comments to explain further.
+	- Add comments for code to be implemented at a later date.
+	- Incomplete code should not be commented out and pushed to master. Create a branch or stash this somewhere else.
+	- Git commits should be short one line subjects with no full stop. Thing in terms of: If applied, this commit will *Add CCS styling for main page*
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Basic setup of project
 
-## Code scaffolding
+1. Clone the repo
+		
+		git clone https://github.com/divsyd/UnlimitedSpace.git
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Install packages
 
-## Build
+		cd ./UnlimitedSpace
+		npm install
+		
+1. Install MongoDB. See guide [here](https://docs.mongodb.com/manual/installation). 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+    - An alternate option is to run Mongo in a docker conntainer
 
-## Running unit tests
+          docker run --name mongodb -p 27017:27017 --rm mongo:4.0.1
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Start mondodb
 
-## Running end-to-end tests
+		mkdir -p ./db/data
+		mongod --dbpath ./db/data --logpath ./db/log
+	
+1. Populate MongoDB collections
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+		node ./populateDb mongodb://localhost:27017/unlimitedSpaceDb
+		
+1. Build Angular frontend
 
-## Further help
+		ng build
+		
+1. Start web server
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+		node ./server.js
+
+- Please note the below:
+
+    - Still need to setup Angular frontend to talk to express api and express  to talk to Mongodb.
