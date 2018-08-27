@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Hotel } from '../hotel';
-import { HotelService } from '../hotel.service';
+import { Observable, Subject } from 'rxjs';
+
+import { Room } from '../room';
+import { RoomService } from '../room.service';
 
 @Component({
   selector: 'app-hotels',
@@ -8,17 +10,22 @@ import { HotelService } from '../hotel.service';
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
-  hotels: Hotel[];
+  private searchTerms = new Subject<string>();
+  rooms: Room[];
 
-  constructor(private hotelService: HotelService) { }
+  constructor(private roomService: RoomService) { }
 
-  ngOnInit() {
-    this.getHotels();
+  // Push a search term into the observable stream.
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 
-  // get all hotels
-  getHotels(): void {
-    this.hotelService.getHotels()
-      .subscribe(hotels => this.hotels = hotels);
+  ngOnInit() {
+    this.getRooms();
+  }
+
+  getRooms(): void {
+    this.roomService.getRooms()
+      .subscribe(rooms => this.rooms = rooms);
   }
 }
