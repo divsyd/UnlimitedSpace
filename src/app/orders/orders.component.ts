@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  
-  id = +this.route.snapshot.paramMap.get('id');
 
   constructor(
     private route: ActivatedRoute,
@@ -18,7 +16,7 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
   }
-
+// back to the main page
   btnClick(): void {
     this.router.navigateByUrl(``);
   }

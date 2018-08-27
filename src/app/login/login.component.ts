@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+// direct to an user
   btnClick(): void {
     this.router.navigateByUrl('/user');
   }

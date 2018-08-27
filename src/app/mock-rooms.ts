@@ -1,5 +1,5 @@
 import { Room } from './room';
-
+// mock data for rooms
 export const ROOMS: Room[] = [
     {
         id: 0,
