@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Room } from '../room';
-import { RoomService } from '../room.service';
+import { Hotel } from '../hotel';
+import { HotelService } from '../hotel.service';
 
 @Component({
   selector: 'app-hotels',
@@ -8,16 +8,17 @@ import { RoomService } from '../room.service';
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
-  rooms: Room[];
+  hotels: Hotel[];
 
-  constructor(private roomService: RoomService) { }
+  constructor(private hotelService: HotelService) { }
 
   ngOnInit() {
-    this.getRooms();
+    this.getHotels();
   }
-// get a specified room
-  getRooms(): void {
-    this.roomService.getRooms()
-      .subscribe(rooms => this.rooms = rooms);
+
+  // get all hotels
+  getHotels(): void {
+    this.hotelService.getHotels()
+      .subscribe(hotels => this.hotels = hotels);
   }
 }
