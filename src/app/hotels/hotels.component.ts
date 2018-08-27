@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Room } from '../room';
 import { RoomService } from '../room.service';
 
@@ -16,7 +15,7 @@ export class HotelsComponent implements OnInit {
   ngOnInit() {
     this.getRooms();
   }
-
+// get a specified room
   getRooms(): void {
     this.roomService.getRooms()
       .subscribe(rooms => this.rooms = rooms);

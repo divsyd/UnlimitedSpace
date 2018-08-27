@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Room } from '../room';
 import { RoomService } from '../room.service';
-
+// all the functions for a hotel room
 @Component({
   selector: 'app-hotel-rooms',
   templateUrl: './hotel-rooms.component.html',
@@ -24,17 +24,17 @@ export class HotelRoomsComponent implements OnInit {
   ngOnInit(): void {
     this.getRoom();
   }
-
+// get a specified room according id
   getRoom(): void {
     this.roomService.getRoom(this.id)
       .subscribe(room => this.room = room);
   }
-
+// return to main page
   goBack(): void {
-    this.router.navigateByUrl("")
+    this.router.navigateByUrl('');
   }
-
+// direct to a order page
   btnClick(): void {
-    this.router.navigateByUrl(`/order/${this.id}`)
+    this.router.navigateByUrl(`/order/${this.id}`);
   }
 }
