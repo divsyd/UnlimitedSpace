@@ -53,6 +53,7 @@
 
 		node ./server.js
 
-- Please note the below:
-
-    - Still need to setup Angular frontend to talk to express api and express  to talk to Mongodb.
+- Please note that all the components are not fully intergrated yet.
+	- You can see Angular frontend here: [http://localhost:8000/hotels](http://localhost:8000/hotels)
+	- You can see the server API: [http://localhost:8000/api/rooms](http://localhost:8000/api/rooms)
+	- We now need to update the angular components to match the database and add CRUD services.
