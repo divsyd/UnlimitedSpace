@@ -1,20 +1,16 @@
-<h2>Hotel Rooms</h2>
+<h2>Hotels</h2>
 <!--TODO Using left to right display the hotel
     try to use picture -->
 <div class="container ">
   <div class="bar">
-    <!-- Create a binding between the searchString model and the text field -->
-    <!--<input type="text" ng-model="searchString" placeholder="Enter your search terms" />-->
-    <input type="text" #searchBox id="search-box" (keyup)="search(searchBox.value)" placeholder="Enter your search terms" />
+    <input type="text" #searchBox id="search-box" placeholder="Enter your search terms" />
   </div>
-
   <div class="row">
-  <ul>
-    <li *ngFor="let room of rooms | async">
-      <a routerLink="/room/{{room.id}}">
-        {{room.name}}
-      </a>
-    </li>
-  </ul>
+    <ul>
+      <li *ngFor="let hotel of hotels">
+        {{hotel.name}}
+
+      </li>
+    </ul>
   </div>
 </div>
