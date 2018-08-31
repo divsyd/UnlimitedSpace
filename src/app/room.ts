@@ -1,7 +1,10 @@
+import { Hotel } from './hotel';
+
 export class Room {
   // room class
-    id: number;
+    _id: string;
     name: string;
+    hotel: string;
     maxGuest: number;
     rooms: number;
 }
