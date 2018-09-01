@@ -51,7 +51,7 @@
 		
 1. Start web server
 
-		node ./server.js
+		node ./server.ts
 
 - Please note that all the components are not fully intergrated yet.
 	- You can see Angular frontend here: [http://localhost:8000/hotels](http://localhost:8000/hotels)

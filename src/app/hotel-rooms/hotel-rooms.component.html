@@ -1,31 +1,15 @@
 <div class="container">
   <div class="row">
-    <ul>
-      <li *ngFor="let room of rooms">
-        <div>
-          <a routerLink="/room/{{room._id}}">
-            <h4>
-              {{room.name}}
-            </h4>
-          </a>
-        </div>
-        <div>
-          <dl>
-            <dt>
-              Rooms:
-            </dt>
-            <dd>
-              {{room.bedrooms}}
-            </dd>
-            <dt>
-              Price per night
-            </dt>
-            <dd>
-              xxx
-            </dd>
-          </dl>
-        </div>
-      </li>
-    </ul>
+    <div *ngIf="room">
+      <h2>{{room.name}} Details</h2>
+      <div>Room id: {{room.id}}</div>
+      <div>name: {{room.name}}</div>
+      <div>Max number of guests: {{room.maxGuest}}</div>
+      <div>Number of rooms: {{room.rooms}}</div>
+    </div>
   </div>
-</div>
+    <div class="row d-flex justify-content-center">
+      <button type="button" class="btn btn-primary space_button" (click)="btnClick();">Order</button>
+      <button class="btn btn-danger space_button"(click)="goBack()" >go back</button>
+    </div>
+  </div>

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { Room } from '../room';
-import { Hotel } from '../hotel';
 import { RoomService } from '../room.service';
-
 // all the functions for a hotel room
 @Component({
   selector: 'app-hotel-rooms',
@@ -10,19 +11,30 @@ import { RoomService } from '../room.service';
   styleUrls: ['./hotel-rooms.component.css']
 })
 export class HotelRoomsComponent implements OnInit {
-  @Input() hotelId: string;
-  rooms: Room[];
+  room: Room;
+  id = +this.route.snapshot.paramMap.get('id');
 
-  constructor(private roomService: RoomService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private roomService: RoomService,
+    private location: Location,
+    private router: Router
+  ) { }
 
-  ngOnInit() {
-    this.getRoomsByHotel();
+  ngOnInit(): void {
+    this.getRoom();
   }
-
-  getRoomsByHotel(): void {
-    const id = this.hotelId;
-    this.roomService.getRooms()
-      .subscribe(rooms => this.rooms = rooms.filter(room => room.hotel === id))
+// get a specified room according id
+  getRoom(): void {
+    this.roomService.getRoom(this.id)
+      .subscribe(room => this.room = room);
   }
-
+// return to main page
+  goBack(): void {
+    this.router.navigateByUrl('');
+  }
+// direct to a order page
+  btnClick(): void {
+    this.router.navigateByUrl(`/order/${this.id}`);
+  }
 }

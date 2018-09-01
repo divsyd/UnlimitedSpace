@@ -1,0 +1,7 @@
+// TODO nodemon doesn't work
+{
+  "watch": ["server"],
+  "ext": "ts",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "ts-node ./server/server.ts"
+}
