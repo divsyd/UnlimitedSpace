@@ -10,6 +10,9 @@ const app = express();
 
 // Get our API routes
 const api = require('./routes/api');
+const hotelApi = require('./routes/hotel');
+const roomApi = require('./routes/room');
+const roomInstanceApi = require('./routes/roomInstance');
 
 //Set up mongoose connection
 const mongoose = require('mongoose');
@@ -23,6 +26,9 @@ app.use(express.static('dist/UnlimitedSpace'));
 
 // Set our api routes
 app.use('/api', api);
+app.use('/api/hotel', hotelApi);
+app.use('/api/room', roomApi);
+app.use('/api/roominstance', roomInstanceApi);
 
 // for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
