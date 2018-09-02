@@ -1,10 +1,8 @@
-import { Hotel } from './hotel';
-
 export class Room {
   // room class
-    _id: string;
+    id: any;
     name: string;
-    hotel: string;
+    hotel: any;
     maxGuest: number;
-    rooms: number;
+    bedrooms: number;
 }

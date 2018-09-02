@@ -13,7 +13,7 @@ const httpOptions = {
 })
 export class HotelService {
 
-  private hotelsUrl = 'api/hotels';  // URL to web api
+  private hotelUrl = 'api/hotel';  // URL to web api
 
   constructor(
     private http: HttpClient
@@ -21,11 +21,19 @@ export class HotelService {
 
   /** GET hotels from the server */
   getHotels(): Observable<Hotel[]> {
-    return this.http.get<Hotel[]>(this.hotelsUrl)
+    return this.http.get<Hotel[]>(this.hotelUrl)
       .pipe(
         catchError(this.handleError('getHotels', []))
       );
   }
+
+    //  Get room by id
+    getHotel(id: string): Observable<Hotel> {
+      const url = `${this.hotelUrl}/${id}`;
+      return this.http.get<Hotel>(url).pipe(
+        catchError(this.handleError<Hotel>(`getHotel id=${id}`))
+      );
+    }
 
   /**
  * Handle Http operation that failed.

@@ -14,52 +14,28 @@ const httpOptions = {
 })
 export class RoomService {
 
-  private roomsUrl = 'api/rooms';  // URL to web api
+  private roomUrl = 'api/room';  // URL to web api
 
   constructor(
     private http: HttpClient
   ) { }
 
 
-  // // to retrive a specified room according to id
-  // getRoom(id: number): Observable<Room> {
-  //   // TODO: send the message _after_ fetching the hero
-  //   return of(ROOMS.find(room => room.id === id));
-  // }
-
-  // GET rooms from the server
   getRooms(): Observable<Room[]> {
-    return this.http.get<Room[]>(this.roomsUrl)
+    return this.http.get<Room[]>(this.roomUrl)
       .pipe(
         catchError(this.handleError('getRooms', []))
       );
   }
 
-  // // GET rooms from the server for a specific hotel
-  // getRoomsByHotelId(id: string): Observable<Room[]> {
-  //   return this.http.get<Room[]>(this.roomsUrl)
-  //     .pipe(
-  //       tap(x => console.log("Before filter")),
-  //       tap(room => console.log(room)),
-  //       catchError(this.handleError('getRoomsByHotelId', [])),
-  //     )
-  //   // .pipe(
-  //   //   tap(x => console.log("About to filter")),
-  //   //   tap(x => console.log(id)),
-  //   //   tap((room: Room) => console.log(room.hotel)),
-  //   //   filter((room: Room) => room.hotel == id),
-  //   //   tap(x => console.log("After filter")),
-  //   //   tap(room => console.log(room))
-  //   // )
+  //  Get room by id
+   getRoom(id: string): Observable<Room> {
+    const url = `${this.roomUrl}/${id}`;
+    return this.http.get<Room>(url).pipe(
+      catchError(this.handleError<Room>(`getRoom id=${id}`))
+    );
+  }
 
-  // }
-
-  /**
- * Handle Http operation that failed.
- * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
- */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

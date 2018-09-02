@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RoomComponent } from './room/room.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     HotelRoomsComponent,
     LoginComponent,
     OrdersComponent,
-    UserComponent
+    UserComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,
