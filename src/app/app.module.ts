@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RoomComponent } from './room/room.component';
+import { RoomDetailComponent } from './room-detail/room-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { RoomComponent } from './room/room.component';
     LoginComponent,
     OrdersComponent,
     UserComponent,
-    RoomComponent
+    RoomDetailComponent
   ],
   imports: [
     BrowserModule,

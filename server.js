@@ -8,6 +8,8 @@ const uuidv1 = require('uuid/v1');
 const _ = require('lodash');
 const app = express();
 
+app.use(express.static('dist/UnlimitedSpace'));
+
 // Get our API routes
 const api = require('./routes/api');
 const hotelApi = require('./routes/hotel');
@@ -21,8 +23,6 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-app.use(express.static('dist/UnlimitedSpace'));
 
 // Set our api routes
 app.use('/api', api);

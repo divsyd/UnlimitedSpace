@@ -27,13 +27,14 @@ export class HotelService {
       );
   }
 
-    //  Get room by id
-    getHotel(id: string): Observable<Hotel> {
-      const url = `${this.hotelUrl}/${id}`;
-      return this.http.get<Hotel>(url).pipe(
-        catchError(this.handleError<Hotel>(`getHotel id=${id}`))
-      );
-    }
+  //  Get room by id
+  getHotel(id: string): Observable<Hotel> {
+    const url = `${this.hotelUrl}/${id}`;
+    return this.http.get<Hotel>(url).pipe(
+      catchError(this.handleError<Hotel>(`getHotel id=${id}`))
+    );
+  }
+
 
   /**
  * Handle Http operation that failed.

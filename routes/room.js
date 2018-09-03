@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 var Room = require('../models/room');
 var RoomDetailed = require('../models/room');
+var mongoose = require('mongoose');
 
 
 // room api
 
 // GET request by id
 router.get('/:id', (req, res) => {
-    Room.findById(req.params.id)
+    Room.findOne({ '_id': req.params.id })
         .then(room => {
             res.status(200).json(room);
         })
@@ -17,8 +18,8 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// get all rooms
 router.get('/', (req, res) => {
-    // get all rooms
     Room.find({})
         .then(rooms => {
             res.status(200).json(rooms);

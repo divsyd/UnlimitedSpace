@@ -1,6 +1,6 @@
 export class Hotel {
   // the hotel class
-    _id: any;
+    _id: string;
     name: string;
     address: string;
     city: string;
