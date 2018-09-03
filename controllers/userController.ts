@@ -1,6 +1,8 @@
 import mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
+
 export class UserController {
   static registration(req, res) {
     console.log(req);
@@ -33,15 +35,37 @@ export class UserController {
         console.log(err);
         res.status(400).json(err);
       } else {
-        console.log('user login');
         if (bcrypt.compareSync(password, user.password)) {
-          res.status(200).json(user);
+          console.log('user login');
+          const token = jwt.sign({ username: user.username },
+                                  'secrete',
+                                  { expiresIn: 3600 });
+          res.status(200).json({ success: true, token: token });
         } else {
-          res.status(401).json('unauthorized');
+          res.status(401).json( { message: 'unauthorized' } );
         }
 
       }
     });
+  }
+
+  static authentication( req, res, next) {
+    const headerExists = req.headers.authentication;
+    if (headerExists) {
+      // TODO maybe not need to split
+      const token = req.headers.authorization.split(' ')[1];
+      jwt.verify(token, 'secrete', (error, decoded) => {
+        if (error) {
+          console.log(error);
+          res.status(401).json('Unauthorized');
+        } else {
+          req.user = decoded.username;
+          next();
+        }
+      });
+    } else {
+      res.status(403).json('No token provided');
+    }
   }
 
 }

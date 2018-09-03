@@ -1,17 +1,13 @@
 <div class="container">
   <h1>Login</h1>
-  <form>
-    <div class="form-group">
-      <label for="name">Username</label>
-      <input type="text" class="form-control" id="name" placeholder="Name" required>
-    </div>
-
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="Password" placeholder="Password">
-    </div>
-
-    <button type="submit" class="btn btn-success" (click)="btnClick();">Submit</button>
-
+  {{errorMsg}} <br>
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+    username <input type="text" formControlName="username">
+    <br>
+    password <input type="password" formControlName="password">
+    <br>
+    <input type="submit" value="Login" [disabled]="loginForm.invalid">
   </form>
+
+
 </div>

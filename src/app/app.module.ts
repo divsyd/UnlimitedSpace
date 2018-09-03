@@ -9,7 +9,10 @@ import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MessagesComponent } from './messages/messages.component';
+import { MatIconModule, MatCardModule, MatInputModule, MatSnackBarModule, MatToolbarModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,13 +20,21 @@ import { HttpClientModule } from '@angular/common/http';
     HotelRoomsComponent,
     LoginComponent,
     OrdersComponent,
-    UserComponent
+    UserComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
