@@ -1,9 +1,10 @@
+import { UserController } from '../controllers/userController';
+import {post} from 'selenium-webdriver/http';
 const express = require('express');
 const router = express.Router();
-
-var Hotel = require('../models/hotel');
-var Room = require('../models/room');
-var RoomInstance = require('../models/roominstance');
+let Hotel = require('../models/hotel');
+let Room = require('../models/room');
+let RoomInstance = require('../models/roominstance');
 
 
 /* GET api listing. */
@@ -46,8 +47,13 @@ router.get('/roominstance', (req, res) => {
             res.status(200).json(roomInstance);
         })
         .catch(error => {
-            res.status(500).send(error)
+            res.status(500).send(error);
         });
 });
+
+router.post('/users/signup', UserController.registration);
+router.post('/users/login', UserController.loginUser);
+
+
 
 module.exports = router;

@@ -19,7 +19,7 @@ export class HotelService {
     private http: HttpClient
   ) { }
 
-  /** GET hotels from the server */
+  /** GET hotels from the config */
   getHotels(): Observable<Hotel[]> {
     return this.http.get<Hotel[]>(this.hotelsUrl)
       .pipe(
