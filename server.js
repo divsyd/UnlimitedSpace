@@ -36,7 +36,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/dist/UnlimitedSpace/index.html'));
+  // res.sendFile(path.join(__dirname + '/dist/UnlimitedSpace/index.html'));
+  res.sendFile(path.join(__dirname + '/src/index.html'));
 });
 
 console.log('Running on http://localhost:8000/');
