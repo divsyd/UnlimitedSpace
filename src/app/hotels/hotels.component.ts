@@ -36,8 +36,8 @@ export class HotelsComponent implements OnInit {
   }
 
   getRoomsByHotel(id): Room[] {
-    if(!this.rooms) return [];
-    return this.rooms.filter(room => room.hotel === id)
+    if (!this.rooms) { return []; }
+    return this.rooms.filter(room => room.hotel === id);
   }
 
 }

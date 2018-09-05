@@ -9,11 +9,15 @@ if (!userArgs[0].startsWith('mongodb://')) {
     return
 }
 
-var async = require('async')
-var Hotel = require('./models/hotel')
-var Room = require('./models/room')
-var RoomInstance = require('./models/roominstance.js')
+// get API models
+var async = require('async');
+var Hotel = require('./models/hotel');
+var Room = require('./models/room');
+var RoomInstance = require('./models/roominstance');
+var Order = require('./models/order');
+var User = require('./models/user');
 
+// get connection
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
 mongoose.connect(mongoDB);
@@ -22,6 +26,9 @@ var db = mongoose.connection;
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Clear current collections
+User.remove({}, function (err) {
+  console.log('User collection removed')
+});
 RoomInstance.remove({}, function (err) {
     console.log('RoomInstance collection removed')
 });
@@ -31,13 +38,40 @@ Room.remove({}, function (err) {
 Hotel.remove({}, function (err) {
     console.log('Hotel collection removed')
 });
+Order.remove({}, function (err) {
+    console.log('Order collection removed')
+});
 
-var hotels = []
-var rooms = []
-var roomInstances = []
+
+var users = [];
+var hotels = [];
+var rooms = [];
+var roomInstances = [];
+var orders = [];
+
+function userCreate(first_name, family_name, date_of_birth, email, phone, cb) {
+  userDetail = {
+    first_name: first_name,
+    family_name: family_name,
+    date_of_birth: date_of_birth,
+    email: email,
+    phone: phone };
+
+  var user = new User(userDetail);
+
+  user.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    console.log('New Hotel: ' + user);
+    users.push(user)
+    cb(null, user)
+  });
+}
 
 function hotelCreate(name, address, city, country, cb) {
-    hotelDetail = { name: name, address: address, city: city, country: country }
+    hotelDetail = { name: name, address: address, city: city, country: country };
 
     var hotel = new Hotel(hotelDetail);
 
@@ -69,19 +103,49 @@ function roomCreate(name, hotel, maxGuest, bedrooms, cb) {
 }
 
 function roomInstanceCreate(room, status, cb) {
-    roomInstanceDetail = { room: room, status: status }
+    roomInstanceDetail = { room: room, status: status };
 
     var roomInstance = new RoomInstance(roomInstanceDetail);
 
     roomInstance.save(function (err) {
         if (err) {
-            cb(err, null)
+            cb(err, null);
             return
         }
         console.log('New RoomInstance: ' + roomInstance);
-        roomInstances.push(roomInstance)
+        roomInstances.push(roomInstance);
         cb(null, roomInstance)
     });
+}
+
+function orderCreate(roomInstance, user, numNights, cb) {
+  orderDetail = { roomInstance: roomInstance, user: user, numNights: numNights };
+
+  var order = new Order(orderDetail);
+
+  order.save(function (err) {
+    if (err) {
+      cb(err, null);
+      return
+    }
+    console.log('New Order: ' + order);
+    orders.push(order);
+    cb(null, order);
+  });
+}
+
+// first_name, family_name, date_of_birth, email, phone
+function createUsers(cb) {
+  async.parallel([
+      function (callback) {
+        userCreate('David', 'Evans', new Date(), '123@123.com', '0420290211', callback);
+      },
+      function (callback) {
+        userCreate('Lingying', 'Yang', new Date(), '321@321.com', '0420290212', callback);
+      },
+    ],
+    // optional callback
+    cb);
 }
 
 // name, address, city, country, cb
@@ -156,10 +220,26 @@ function createRoomInstances(cb) {
         cb);
 }
 
+// roomInstance, user, numNights
+function createOrders(cb) {
+  async.parallel([
+      function (callback) {
+        orderCreate(roomInstances[0], users[0], 1, callback);
+      },
+      function (callback) {
+        orderCreate(roomInstances[1], users[1], 2, callback);
+      },
+    ],
+    // optional callback
+    cb);
+}
+
 async.series([
+    createUsers,
     createHotels,
     createRooms,
-    createRoomInstances
+    createRoomInstances,
+    createOrders
 ],
     // Optional callback
     function (err, results) {
