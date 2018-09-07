@@ -2,10 +2,9 @@ import { UserController } from '../controllers/userController';
 import {post} from 'selenium-webdriver/http';
 const express = require('express');
 const router = express.Router();
-let Hotel = require('../models/hotel');
-let Room = require('../models/room');
-let RoomInstance = require('../models/roominstance');
-
+const Hotel = require('../models/hotel');
+const Room = require('../models/room');
+const RoomInstance = require('../models/roominstance');
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -34,7 +33,7 @@ router.get('/hotels', (req, res) => {
             res.status(200).json(hotels);
         })
         .catch(error => {
-            res.status(500).send(error)
+            res.status(500).send(error);
         });
 });
 

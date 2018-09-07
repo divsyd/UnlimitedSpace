@@ -9,10 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MessagesComponent } from './messages/messages.component';
-import { MatIconModule, MatCardModule, MatInputModule, MatSnackBarModule, MatToolbarModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { RoomDetailComponent } from './room-detail/room-detail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,20 +19,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     OrdersComponent,
     UserComponent,
-    MessagesComponent
+    RoomDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
-    MatCardModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatToolbarModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatIconModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

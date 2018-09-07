@@ -1,15 +1,20 @@
-<h2>Hotels</h2>
-<!--TODO Using left to right display the hotel
+<div class="container">
+  <h2>Hotels</h2>
+  <!--TODO Using left to right display the hotel
     try to use picture -->
-<div class="container ">
+
   <div class="bar">
     <input type="text" #searchBox id="search-box" placeholder="Enter your search terms" />
   </div>
   <div class="row">
     <ul>
       <li *ngFor="let hotel of hotels">
-        {{hotel.name}}
-
+        <h3>
+          {{hotel.name}}
+        </h3>
+        <div>
+          <app-hotel-rooms [rooms]="getRoomsByHotel(hotel._id)"></app-hotel-rooms>
+        </div>
       </li>
     </ul>
   </div>

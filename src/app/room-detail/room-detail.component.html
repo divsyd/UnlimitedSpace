@@ -1,0 +1,11 @@
+<div *ngIf="room && hotel">
+  <h4>{{room.name}} Details</h4>
+  <div><span>id: </span>{{room._id}}</div>
+  <div><span>hotel: </span>{{hotel.name}}</div>
+  <div><span>address: </span>{{hotel.address}}</div>
+  <div><span>city: </span>{{hotel.city}}</div>
+  <div><span>country: </span>{{hotel.country}}</div>
+  <div><span>Max guests: </span>{{room.maxGuest}}</div>
+  <div><span>bedrooms: </span>{{room.bedrooms}}</div>
+  <button (click)="goBack()">go back</button>
+</div>
