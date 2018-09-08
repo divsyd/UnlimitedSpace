@@ -49,10 +49,10 @@ var rooms = [];
 var roomInstances = [];
 var orders = [];
 
-function userCreate(first_name, family_name, date_of_birth, email, phone, cb) {
+function userCreate(username, password, date_of_birth, email, phone, cb) {
   userDetail = {
-    first_name: first_name,
-    family_name: family_name,
+    username: username,
+    password: password,
     date_of_birth: date_of_birth,
     email: email,
     phone: phone };
@@ -64,7 +64,7 @@ function userCreate(first_name, family_name, date_of_birth, email, phone, cb) {
       cb(err, null)
       return
     }
-    console.log('New Hotel: ' + user);
+    console.log('New User: ' + user);
     users.push(user)
     cb(null, user)
   });
@@ -138,10 +138,10 @@ function orderCreate(roomInstance, user, numNights, cb) {
 function createUsers(cb) {
   async.parallel([
       function (callback) {
-        userCreate('David', 'Evans', new Date(), '123@123.com', '0420290211', callback);
+        userCreate('David Evans', '123456', new Date(), '123@123.com', '0420290211', callback);
       },
       function (callback) {
-        userCreate('Lingying', 'Yang', new Date(), '321@321.com', '0420290212', callback);
+        userCreate('Lingying Yang', '123456', new Date(), '321@321.com', '0420290212', callback);
       },
     ],
     // optional callback
