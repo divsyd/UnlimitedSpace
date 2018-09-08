@@ -5,6 +5,7 @@ import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/hotels', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'order/:id', component: OrdersComponent },
   { path: 'user', component: UserComponent },
+  { path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
