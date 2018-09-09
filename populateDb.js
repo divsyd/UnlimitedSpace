@@ -14,7 +14,7 @@ var async = require('async');
 var Hotel = require('./models/hotel');
 var Room = require('./models/room');
 var RoomInstance = require('./models/roominstance');
-var Order = require('./models/order');
+// var Order = require('./models/order');
 var User = require('./models/user');
 
 // get connection
@@ -38,24 +38,26 @@ Room.remove({}, function (err) {
 Hotel.remove({}, function (err) {
     console.log('Hotel collection removed')
 });
-Order.remove({}, function (err) {
-    console.log('Order collection removed')
-});
+// Order.remove({}, function (err) {
+//     console.log('Order collection removed')
+// });
 
 
 var users = [];
 var hotels = [];
 var rooms = [];
 var roomInstances = [];
-var orders = [];
+// var orders = [];
 
-function userCreate(username, password, date_of_birth, email, phone, cb) {
+function userCreate(username, password, date_of_birth, email, phone, [orders],cb) {
   userDetail = {
     username: username,
     password: password,
     date_of_birth: date_of_birth,
     email: email,
-    phone: phone };
+    phone: phone,
+    orders: [orders]
+    };
 
   var user = new User(userDetail);
 
@@ -118,35 +120,23 @@ function roomInstanceCreate(room, status, cb) {
     });
 }
 
-function orderCreate(roomInstance, user, numNights, cb) {
-  orderDetail = { roomInstance: roomInstance, user: user, numNights: numNights };
+// function orderCreate(roomInstance, user, numNights, cb) {
+//   orderDetail = { roomInstance: roomInstance, user: user, numNights: numNights };
+//
+//   var order = new Order(orderDetail);
+//
+//   order.save(function (err) {
+//     if (err) {
+//       cb(err, null);
+//       return
+//     }
+//     console.log('New Order: ' + order);
+//     orders.push(order);
+//     cb(null, order);
+//   });
+// }
 
-  var order = new Order(orderDetail);
 
-  order.save(function (err) {
-    if (err) {
-      cb(err, null);
-      return
-    }
-    console.log('New Order: ' + order);
-    orders.push(order);
-    cb(null, order);
-  });
-}
-
-// first_name, family_name, date_of_birth, email, phone
-function createUsers(cb) {
-  async.parallel([
-      function (callback) {
-        userCreate('David Evans', '123456', new Date(), '123@123.com', '0420290211', callback);
-      },
-      function (callback) {
-        userCreate('Lingying Yang', '123456', new Date(), '321@321.com', '0420290212', callback);
-      },
-    ],
-    // optional callback
-    cb);
-}
 
 // name, address, city, country, cb
 function createHotels(cb) {
@@ -221,13 +211,33 @@ function createRoomInstances(cb) {
 }
 
 // roomInstance, user, numNights
-function createOrders(cb) {
+// function createOrders(cb) {
+//   async.parallel([
+//       function (callback) {
+//         orderCreate(roomInstances[0], users[0], 1, callback);
+//       },
+//       function (callback) {
+//         orderCreate(roomInstances[1], users[1], 2, callback);
+//       },
+//     ],
+//     // optional callback
+//     cb);
+// }
+
+// first_name, family_name, date_of_birth, email, phone
+function createUsers(cb) {
   async.parallel([
       function (callback) {
-        orderCreate(roomInstances[0], users[0], 1, callback);
+        userCreate('David Evans', '123456', new Date(), '123@123.com', '0420290211',[
+          { roomInstance: roomInstances[0], //reference to the associated room
+            numNights: 2}
+        ],callback);
       },
       function (callback) {
-        orderCreate(roomInstances[1], users[1], 2, callback);
+        userCreate('Lingying Yang', '123456', new Date(), '321@321.com', '0420290212', [
+          { roomInstance: roomInstances[1], //reference to the associated room
+            numNights: 3 }
+        ],callback);
       },
     ],
     // optional callback
@@ -235,11 +245,11 @@ function createOrders(cb) {
 }
 
 async.series([
-    createUsers,
     createHotels,
     createRooms,
     createRoomInstances,
-    createOrders
+    createUsers
+    // createOrders
 ],
     // Optional callback
     function (err, results) {
