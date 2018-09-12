@@ -1,7 +1,8 @@
 export class Room {
   // room class
-    id: number;
-    name: string;
-    maxGuest: number;
-    bedrooms: number;
+  _id: string;
+  name: string;
+  hotel: string;
+  maxGuest: number;
+  bedrooms: number;
 }
