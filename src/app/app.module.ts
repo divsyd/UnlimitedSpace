@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HotelsComponent } from './hotels/hotels.component';
 import { HotelRoomsComponent } from './hotel-rooms/hotel-rooms.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { LoginComponent } from './login/login.component';
+// import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AppComponent,
     HotelsComponent,
     HotelRoomsComponent,
-    LoginComponent,
+    // LoginComponent,
     OrdersComponent,
     UserComponent,
     RoomDetailComponent,
