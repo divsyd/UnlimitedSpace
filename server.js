@@ -39,5 +39,6 @@ app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname + '/src/index.html'));
 });
 
-console.log('Running on http://localhost:8000/');
-app.listen(8000);
+const port = process.env.PORT || 8000;
+console.log(`Running on http://localhost:${port}/`);
+app.listen(port);
