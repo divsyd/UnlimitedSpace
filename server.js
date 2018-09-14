@@ -36,7 +36,7 @@ app.use('/api', api);
 //
 
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/src/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/UnlimitedSpace/index.html'));
 });
 
 const port = process.env.PORT || 8000;
