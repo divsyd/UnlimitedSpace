@@ -1,4 +1,4 @@
-import mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
