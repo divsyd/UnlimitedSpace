@@ -33,14 +33,14 @@ export class RoomDetailComponent implements OnInit {
       .subscribe(
         room => {
           this.room = room;
-          () => this.getHotel(room.hotel);
+          this.getHotel(room.hotel);
         }
       );
   }
 
   getHotel(id: string): void {
     this.hotelService.getHotel(id)
-      .subscribe(hotel => this.hotel = hotel)
+      .subscribe(hotel => this.hotel = hotel);
   }
 
   goBack(): void {
