@@ -1,5 +1,9 @@
 # UnlimitedSpace
 
+[![Build Status](https://divsyd.visualstudio.com/UnlimitedSpace/_apis/build/status/UnlimitedSpace-CI)](https://divsyd.visualstudio.com/UnlimitedSpace/_build/latest?definitionId=5)
+
+Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimitedspace.azurewebsites.net/)
+
 ## Key code style and design principles
 
 - Weapons of choice... We are building a MEAN app!
@@ -34,7 +38,7 @@
 
     - An alternate option is to run Mongo in a docker conntainer
 
-          docker run --name mongodb -p 27017:27017 --rm mongo:4.0.1
+        	docker run --name mongodb -p 27017:27017 --rm mongo:4.0.1
 
 1. Start mondodb
 
@@ -43,7 +47,13 @@
 	
 1. Populate MongoDB collections
 
-		node ./populateDb mongodb://localhost:27017/unlimitedSpaceDb
+	- Populate local DB with:
+
+			node ./populateDb mongodb://localhost:27017/unlimitedSpaceDb
+
+	- Populate cloud DB with:
+
+			node ./populateDb mongodb+srv://dbuser:PASSWORD@cluster0-d1fpj.mongodb.net/test?retryWrites=true
 		
 1. Build Angular frontend
 
@@ -51,9 +61,10 @@
 		
 1. Start web server
 
-		ts-node ./server.ts
+		npm start
 
-- Please note that all the components are not fully intergrated yet.
-	- You can see Angular frontend here: [http://localhost:8000/hotels](http://localhost:8000/hotels)
-	- You can see the server API: [http://localhost:8000/api/rooms](http://localhost:8000/api/rooms)
-	- We now need to update the angular components to match the database and add CRUD services.
+## Website links
+
+- main site: [https://unlimitedspace.azurewebsites.net/](https://unlimitedspace.azurewebsites.net/)
+- api get all rooms: [https://unlimitedspace.azurewebsites.net/api/rooms](https://unlimitedspace.azurewebsites.net/api/rooms)
+- api get room by id: [https://unlimitedspace.azurewebsites.net/api/rooms/{roomid}](https://unlimitedspace.azurewebsites.net/api/rooms/{roomid})
