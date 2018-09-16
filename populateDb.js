@@ -235,8 +235,8 @@ function createUsers(cb) {
       },
       function (callback) {
         userCreate('Lingying Yang', '123456', new Date(), '321@321.com', '0420290212', [
-          { roomInstance: roomInstances[1], //reference to the associated room
-            numNights: 3 }
+          { roomInstance: roomInstances[1], numNights: 3 },
+          { roomInstance: roomInstances[2], numNights: 4 },
         ],callback);
       },
     ],
