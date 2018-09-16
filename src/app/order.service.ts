@@ -12,6 +12,13 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
+  // Get all orders
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.orderUrl).pipe(
+      catchError(this.handleError<Order[]>(`getAllOrders`))
+    );
+  }
+
   //  Get orders by user id
   getOrders(usrId: string): Observable<Order[]> {
     const url = `${this.orderUrl}/${usrId}`;

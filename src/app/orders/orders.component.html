@@ -1,10 +1,35 @@
-<!--TODO need a calendar-->
 <div class="container">
 
   <div class="row d-flex justify-content-center">
-    <div >
-    <button type="submit" class="btn btn-success space_button" >confirm</button><span class=""></span>
-    <button type="button" class="btn btn-danger space_button" (click)="btnClick();">Cancel</button>
+
+    <div class="row">
+      <ul>
+        <li *ngFor="let order of orders">
+          <h3>
+            Order No: {{order._id}}
+          </h3>
+          <dl>
+            <dt>
+              Reservation Date:
+            </dt>
+            <dd>
+              {{order.reservationDate}}
+            </dd>
+            <dt>
+              Number of Nights
+            </dt>
+            <dd>
+              {{order.numNights}}
+            </dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-success space_button">confirm</button>
+      <span class=""></span>
+      <button type="button" class="btn btn-danger space_button" (click)="btnClick();">Cancel</button>
     </div>
   </div>
 </div>

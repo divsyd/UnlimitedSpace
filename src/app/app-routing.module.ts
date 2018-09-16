@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'hotels', component: HotelsComponent },
   { path: 'room/:id', component: RoomDetailComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'order', component: OrdersComponent },
   { path: 'order/:id', component: OrdersComponent },
   { path: 'user', component: UserComponent },
   { path: '**', component: PageNotFoundComponent}
