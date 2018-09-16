@@ -3,7 +3,7 @@ const User = mongoose.model('User');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 
-export class UserController {
+module.exports = class UserController {
   static registration(req, res) {
     console.log(req);
     const username = req.body.username;
@@ -67,5 +67,4 @@ export class UserController {
       res.status(403).json('No token provided');
     }
   }
-
-}
+};

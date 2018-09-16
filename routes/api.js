@@ -1,5 +1,6 @@
-// const UserController = require('../controllers/userController');
+
 // import {post} from 'selenium-webdriver/http';
+const UserController = require('../controllers/userController');
 const express = require('express');
 const router = express.Router();
 const Hotel = require('../models/hotel');
@@ -50,8 +51,8 @@ router.get('/roominstance', (req, res) => {
         });
 });
 
-// router.post('/users/signup', UserController.registration);
-// router.post('/users/login', UserController.loginUser);
+router.post('/users/signup', UserController.registration);
+router.post('/users/login', UserController.loginUser);
 
 
 module.exports = router;

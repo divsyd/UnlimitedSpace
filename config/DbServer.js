@@ -1,7 +1,6 @@
 // Configuration for DB
-
-const mongoose = require('mongoose');
 const mongoDB = process.env.CUSTOMCONNSTR_mongo || 'mongodb://localhost:27017/unlimitedSpaceDb';
+const mongoose = require('mongoose');
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
