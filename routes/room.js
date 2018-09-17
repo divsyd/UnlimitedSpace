@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 router.get('/name/:name', (req, res) => {
 
   // Room.find({'name': req.params.name})
-  Room.find({'name': {$regex: ".*" + req.params.name + ".*"}})
+  Room.find({'name': {$regex: ".*" + req.params.name + ".*", $options: 'i'}})
     .then(rooms => {
       res.status(200).json(rooms);
     })
