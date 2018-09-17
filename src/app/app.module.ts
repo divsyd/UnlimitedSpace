@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     UserComponent,
     RoomDetailComponent,
     PageNotFoundComponent,
-    MessagesComponent
+    MessagesComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

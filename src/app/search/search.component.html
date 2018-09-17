@@ -1,0 +1,15 @@
+<div id="search-component">
+
+  <div class="input-group mb-3">
+    <input #searchBox id="search-box" class="form-control" placeholder="Enter your search terms"
+           (keyup)="search(searchBox.value)"/>
+  </div>
+
+  <ul class="search-result">
+    <li *ngFor="let room of rooms$ | async">
+      <a routerLink="/room/{{room._id}}">
+        {{room.name}}
+      </a>
+    </li>
+  </ul>
+</div>

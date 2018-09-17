@@ -48,5 +48,18 @@ export class RoomService {
   }
 
 
+  searchRooms(term: string): Observable<Room[]> {
+    if (!term.trim()) {
+      // if not search term, return empty room array.
+      return of([]);
+    }
+
+    const url = `${this.roomUrl}/name/${term}`;
+
+    return this.http.get<Room[]>(url).pipe(
+      tap(_ => console.log(`found rooms matching "${term}"`)),
+      catchError(this.handleError<Room[]>('searchRooms', []))
+    );
+  }
 }
 

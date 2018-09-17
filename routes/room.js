@@ -29,4 +29,17 @@ router.get('/', (req, res) => {
         });
 });
 
+// search rooms
+router.get('/name/:name', (req, res) => {
+
+  // Room.find({'name': req.params.name})
+  Room.find({'name': {$regex: ".*" + req.params.name + ".*"}})
+    .then(rooms => {
+      res.status(200).json(rooms);
+    })
+    .catch(error => {
+      res.status(500).send(error)
+    });
+});
+
 module.exports = router;
