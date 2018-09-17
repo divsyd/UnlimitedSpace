@@ -12,12 +12,12 @@
 
   <div class="row">
     <ul>
-      <li *ngFor="let hotel of hotels">
+      <li *ngFor="let hotel of hotels$ | async">
         <h3>
           {{hotel.name}}
         </h3>
         <div>
-          <app-hotel-rooms [rooms]="getRoomsByHotel(hotel._id)"></app-hotel-rooms>
+          <app-hotel-rooms [hotelId]="hotel._id"></app-hotel-rooms>
         </div>
       </li>
     </ul>

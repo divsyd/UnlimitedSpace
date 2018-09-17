@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Room } from '../room';
+import { RoomDetail } from '../roomDetail';
 import { RoomService } from '../room.service';
 import { Hotel } from '../hotel';
 import { HotelService } from '../hotel.service';
+
 
 @Component({
   selector: 'app-room-detail',
@@ -20,27 +22,17 @@ export class RoomDetailComponent implements OnInit {
     private location: Location
   ) { }
 
-  room: Room;
-  hotel: Hotel;
+  roomDetail: RoomDetail;
 
   ngOnInit(): void {
-    this.getRoom();
-  }
-
-  getRoom(): void {
     const roomId = this.route.snapshot.paramMap.get('id');
-    this.roomService.getRoom(roomId)
-      .subscribe(
-        room => {
-          this.room = room;
-          this.getHotel(room.hotel);
-        }
-      );
-  }
+    this.roomService.getRoom(roomId).subscribe(room => {
+      this.hotelService.getHotel(room.hotel).subscribe(hotel => {
+        this.roomDetail = new RoomDetail(room);
+        this.roomDetail.hotel = hotel;
+      });
+    });
 
-  getHotel(id: string): void {
-    this.hotelService.getHotel(id)
-      .subscribe(hotel => this.hotel = hotel);
   }
 
   goBack(): void {
