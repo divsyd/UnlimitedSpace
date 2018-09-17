@@ -3,9 +3,9 @@ const User = mongoose.model('User');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 
-export class UserController {
+module.exports = class UserController {
   static registration(req, res) {
-    console.log(req);
+    console.log(req.body);
     const username = req.body.username;
     const password = req.body.password;
 
@@ -36,7 +36,6 @@ export class UserController {
         res.status(400).json(err);
       } else {
         if (bcrypt.compareSync(password, user.password)) {
-          console.log('user login');
           const token = jwt.sign({ username: user.username },
                                   'secrete',
                                   { expiresIn: 3600 });
@@ -67,5 +66,4 @@ export class UserController {
       res.status(403).json('No token provided');
     }
   }
-
-}
+};

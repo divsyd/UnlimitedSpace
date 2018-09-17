@@ -60,10 +60,8 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 		ng build
 		
 1. Start web server
+    npm start
 
-		npm start
-
-## Website links
 
 - main site: [https://unlimitedspace.azurewebsites.net/](https://unlimitedspace.azurewebsites.net/)
 - api get all rooms: [https://unlimitedspace.azurewebsites.net/api/rooms](https://unlimitedspace.azurewebsites.net/api/rooms)

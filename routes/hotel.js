@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 var Hotel = require('../models/hotel');
 
-
 // hotel api
 
 // GET request by id

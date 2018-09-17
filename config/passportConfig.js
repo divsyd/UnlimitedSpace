@@ -1,4 +1,4 @@
-import local = require('passport-local');
-class PassportConfig {
-
-}
+// import local = require('passport-local');
+// class PassportConfig {
+//
+// }
