@@ -23,7 +23,8 @@ export class HotelService {
   getHotels(): Observable<Hotel[]> {
     return this.http.get<Hotel[]>(this.hotelUrl)
       .pipe(
-        catchError(this.handleError('getHotels', []))
+        catchError(this.handleError('getHotels', [])),
+        tap(x => console.log('getHotels', x))
       );
   }
 
@@ -31,7 +32,8 @@ export class HotelService {
   getHotel(id: string): Observable<Hotel> {
     const url = `${this.hotelUrl}/${id}`;
     return this.http.get<Hotel>(url).pipe(
-      catchError(this.handleError<Hotel>(`getHotel id=${id}`))
+      catchError(this.handleError<Hotel>(`getHotel id=${id}`)),
+      tap(x => console.log('getHotel', x))
     );
   }
 

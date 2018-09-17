@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap, filter } from 'rxjs/operators';
 import { Room } from './room';
-import { Hotel } from './hotel';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,16 +23,29 @@ export class RoomService {
   getRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.roomUrl)
       .pipe(
-        catchError(this.handleError('getRooms', []))
+        catchError(this.handleError('getRooms', [])),
+        tap(x => console.log('getRooms', x))
       );
   }
 
   //  Get room by id
-   getRoom(id: string): Observable<Room> {
+  getRoom(id: string): Observable<Room> {
     const url = `${this.roomUrl}/${id}`;
-    return this.http.get<Room>(url).pipe(
-      catchError(this.handleError<Room>(`getRoom id=${id}`))
-    );
+    return this.http.get<Room>(url)
+      .pipe(
+        catchError(this.handleError<Room>(`getRoom id=${id}`)),
+        tap(x => console.log('getRoom', x))
+      );
+  }
+
+  //  Get rooms by hotel id
+  getRoomByHotel(id: string): Observable<Room[]> {
+    return this.http.get<Room[]>(this.roomUrl)
+      .pipe(
+        catchError(this.handleError('getRooms', [])),
+        map(rooms => rooms.filter(room => room.hotel === id)),
+        tap(x => console.log('getRoomByHotel', x))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

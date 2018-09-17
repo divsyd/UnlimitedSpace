@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <ul>
-      <li *ngFor="let room of rooms">
+      <li *ngFor="let room of rooms$ | async">
         <div>
           <a routerLink="/room/{{room._id}}">
             <h4>

@@ -1,11 +1,11 @@
-<div *ngIf="room && hotel">
-  <h4>{{room.name}} Details</h4>
-  <div><span>id: </span>{{room._id}}</div>
-  <div><span>hotel: </span>{{hotel.name}}</div>
-  <div><span>address: </span>{{hotel.address}}</div>
-  <div><span>city: </span>{{hotel.city}}</div>
-  <div><span>country: </span>{{hotel.country}}</div>
-  <div><span>Max guests: </span>{{room.maxGuest}}</div>
-  <div><span>bedrooms: </span>{{room.bedrooms}}</div>
+<div *ngIf="roomDetail">
+  <h4>{{roomDetail.name}} Details</h4>
+  <div><span>id: </span>{{roomDetail._id}}</div>
+  <div><span>hotel: </span>{{roomDetail.hotel.name}}</div>
+  <div><span>address: </span>{{roomDetail.hotel.address}}</div>
+  <div><span>city: </span>{{roomDetail.hotel.city}}</div>
+  <div><span>country: </span>{{roomDetail.hotel.country}}</div>
+  <div><span>Max guests: </span>{{roomDetail.maxGuest}}</div>
+  <div><span>bedrooms: </span>{{roomDetail.bedrooms}}</div>
   <button (click)="goBack()">go back</button>
 </div>

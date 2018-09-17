@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Room } from '../room';
-import { Hotel } from '../hotel';
+import { Observable } from 'rxjs';
+import { RoomService } from '../room.service';
+
 
 
 // all the functions for a hotel room
@@ -10,11 +12,15 @@ import { Hotel } from '../hotel';
   styleUrls: ['./hotel-rooms.component.css']
 })
 export class HotelRoomsComponent implements OnInit {
-  @Input() rooms: Room[];
+  @Input() hotelId: string
+  rooms$: Observable<Room[]>
 
-  constructor() { }
+  constructor(
+    private roomService: RoomService
+  ) { }
 
   ngOnInit() {
+    this.rooms$ = this.roomService.getRoomByHotel(this.hotelId)
   }
 
 }
