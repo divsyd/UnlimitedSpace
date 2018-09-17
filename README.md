@@ -60,7 +60,7 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 		ng build
 		
 1. Start web server
-		nodemon
+    npm start
 
 
 - main site: [https://unlimitedspace.azurewebsites.net/](https://unlimitedspace.azurewebsites.net/)
