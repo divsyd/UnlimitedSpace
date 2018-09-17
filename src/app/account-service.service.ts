@@ -13,12 +13,12 @@ export class AccountServiceService {
   constructor(private http: HttpClient) { }
 
   login(user: User): Observable<any> {
-    console.log(this.http);
     return this.http.post(this.BASE_URL + 'login', user)
-      .pipe(map((res: Response) => {
-          console.log(res.status);
-          return { status: res.status, result: true};
+      .pipe(map((res ) => {
+          console.log(res);
+          return res ;
         }
       ));
   }
-}
+  }
+

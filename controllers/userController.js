@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = class UserController {
   static registration(req, res) {
-    console.log(req);
+    console.log(req.body);
     const username = req.body.username;
     const password = req.body.password;
 
@@ -36,7 +36,6 @@ module.exports = class UserController {
         res.status(400).json(err);
       } else {
         if (bcrypt.compareSync(password, user.password)) {
-          console.log('user login');
           const token = jwt.sign({ username: user.username },
                                   'secrete',
                                   { expiresIn: 3600 });

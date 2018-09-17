@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   loginUser(): void {
     this.accountservice.login(this.loginForm.value).subscribe(
       res => {
-        console.log(res.status, res.result);
-        if (res.status === 200 && res.result === true ) {
+        console.log(res);
+        if (res['success'] ) {
           console.log('reach navigate');
           this.router.navigateByUrl('/user');
         }

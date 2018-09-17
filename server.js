@@ -15,19 +15,18 @@ const hotelApi = require('./routes/hotel');
 const roomApi = require('./routes/room');
 const roomInstanceApi = require('./routes/roomInstance');
 const orderApi = require('./routes/order');
+// for parsing application/x-www-form-urlencoded
+// for parsing application/json
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set our api routes
 app.use('/api', api);
-app.use('/api/user', userApi);
 app.use('/api/hotel', hotelApi);
 app.use('/api/room', roomApi);
 app.use('/api/roominstance', roomInstanceApi);
 app.use('/api/order', orderApi);
 
-// for parsing application/x-www-form-urlencoded
-// for parsing application/json
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static('./dist/UnlimitedSpace'));
 

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var UserSchema = new Schema(
-    {
+  {
         // first_name: { type: String, required: true, max: 100 },
         // family_name: { type: String, required: true, max: 100 },
         username:{
@@ -15,7 +16,6 @@ var UserSchema = new Schema(
         date_of_birth: { type: Date },
         email: { type: String, max: 100 },
         phone: { type: String, max: 100 },
-        orders: [OrderSchema]
     }
 );
 
