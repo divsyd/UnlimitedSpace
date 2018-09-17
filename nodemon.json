@@ -1,7 +1,7 @@
 
 {
   "ignore": ["**/*.test.ts", "**/*.spec.ts", ".git", "node_modules"],
-  "watch": ["config", "controllers", "routes"],
+  "watch": ["config", "controllers", "routes", "src/app"],
   "ext": "js" ,
-  "exec": "npm start"
+  "exec": " ng build & npm start"
 }
