@@ -62,6 +62,16 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 1. Start web server
 
     npm start
+    
+Testing User account
+  1.  test3@account.com 
+      
+      password: testtest
+      
+  2.  test4@account.com 
+      
+      password: testtest
+         
 
 
 - main site: [https://unlimitedspace.azurewebsites.net/](https://unlimitedspace.azurewebsites.net/)
