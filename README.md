@@ -57,9 +57,10 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 		
 1. Build Angular frontend
 
-		ng build
+		 ng build
 		
 1. Start web server
+
     npm start
 
 

@@ -49,7 +49,7 @@ var rooms = [];
 var roomInstances = [];
 var orders = [];
 
-function userCreate(username, password, date_of_birth, email, phone, cb) {
+function userCreate(email, username, password, date_of_birth, phone, cb) {
   userDetail = {
     username: username,
     password: password,
@@ -138,10 +138,11 @@ function orderCreate(roomInstance, user, numNights, cb) {
 function createUsers(cb) {
   async.parallel([
       function (callback) {
-        userCreate('David Evans', '123456', new Date(), '123@123.com', '0420290211', callback);
+        userCreate('test3@account.com', 'test3User', '$2a$10$QfAZ6EeSXyrW5d1wRWEB/.uJTO1KXg76nxFz0os91SasBWf3d.Ig2',new Date(),
+          '0420290211', callback)
       },
       function (callback) {
-        userCreate('Lingying Yang', '123456', new Date(), '321@321.com', '0420290212', callback);
+        userCreate('test4@account.com', 'test2User', "$2a$10$9BKZECM6pQUnGd8oYGz5q.eGMMfyNUDOfEawuVZ1yMwCurTdx.g1O",new Date(), '0420290211', callback)
       },
     ],
     // optional callback

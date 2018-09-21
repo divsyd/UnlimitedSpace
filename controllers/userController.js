@@ -6,11 +6,11 @@ const jwt = require('jsonwebtoken');
 module.exports = class UserController {
   static registration(req, res) {
     console.log(req.body);
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
     User.create({
-      username: username,
+      email: email,
       password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
     }, function(err, user) {
       if (err) {
@@ -24,12 +24,11 @@ module.exports = class UserController {
   }
   // login function
   static loginUser(req, res) {
-    console.log('reach the login part');
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
     User.findOne({
-      username: username
+      email: email
     }).exec(function (err, user) {
       if (err) {
         console.log(err);

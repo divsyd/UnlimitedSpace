@@ -14,13 +14,6 @@ db.on('error',
   (err => console.log('Mongoose connection error' + err)));
 
 // Add an notification when User Ctl+c terminates the db connection
-process.on('SIGINT', () => {
-  db.close(() => {
-    console.log('Mongoose disconnected by terminating');
-    process.exit(0);
-  });
-});
-
 process.on('SIGTERM', () => {
   db.close(() => {
     console.log('Mongoose disconnected by terminating(SIGTERM)');

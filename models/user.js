@@ -6,15 +6,20 @@ var UserSchema = new Schema(
         // family_name: { type: String, required: true, max: 100 },
         username:{
           type: String,
-          unique: true,
-          required: true,
         },
+
+        email: {
+          type: String,
+          unique: true,
+          max: 20,
+          required: true
+        },
+
         password:{
           type: String,
           required: true,
        },
         date_of_birth: { type: Date },
-        email: { type: String, max: 100 },
         phone: { type: String, max: 100 },
     }
 );

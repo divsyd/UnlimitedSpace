@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Login</h1>
+  {{errorMsg}} <br>
+  <div class="row">
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      email <input type="text" formControlName="email">
+      <br>
+       password <input type="password" formControlName="password">
+      <br>
+      <input class="btn btn-primary" type="submit" value="Login" [disabled]="loginForm.invalid">
+    </form>
+  </div>
+
+
+</div>
