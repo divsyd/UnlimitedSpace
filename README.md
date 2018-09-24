@@ -33,6 +33,8 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 
 		cd ./UnlimitedSpace
 		npm install
+		In windows OS, Open powershell with administrator privileges and run this command, then proceed with bcrypt installation
+		npm install --global --production windows-build-tools
 		
 1. Install MongoDB. See guide [here](https://docs.mongodb.com/manual/installation). 
 
