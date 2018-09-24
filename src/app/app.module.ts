@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -17,6 +17,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import {AuthInterceptor} from './servers/account/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/materia
     MatCardModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

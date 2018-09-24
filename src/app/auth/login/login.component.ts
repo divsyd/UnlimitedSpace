@@ -12,6 +12,7 @@ import {validate} from 'codelyzer/walkerFactory/walkerFn';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMsg: String = '';
+
   constructor(private router: Router,
               private formbuilder: FormBuilder,
               private accountservice: AccountServiceService) {
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]]
     });
   }
+
 // direct to an user
   btnClick(): void {
     this.router.navigateByUrl('/user');
@@ -30,17 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(): void {
-    this.accountservice.login(this.loginForm.value).subscribe(
-      res => {
-        console.log(res);
-        if (res['success'] ) {
-          console.log('reach navigate');
-          this.router.navigateByUrl('/user');
-        }
-      },
-      error => {
-        this.errorMsg = error;
-      }
-    );
+    this.accountservice.login(this.loginForm.value);
   }
 }

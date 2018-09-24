@@ -21,26 +21,32 @@ var User = require('./models/user');
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
 mongoose.connect(mongoDB);
+connectedDb = mongoose.connection;
+// delete the whole database to remove existing index
+connectedDb.on('open',( ()=>{
+  connectedDb.db.dropDatabase();
+}));
 mongoose.Promise = global.Promise;
-var db = mongoose.connection;
+// var db = mongoose.connection;
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Clear current collections
-User.remove({}, function (err) {
-  console.log('User collection removed')
-});
-RoomInstance.remove({}, function (err) {
-  console.log('RoomInstance collection removed')
-});
-Room.remove({}, function (err) {
-  console.log('Room collection removed')
-});
-Hotel.remove({}, function (err) {
-  console.log('Hotel collection removed')
-});
-Order.remove({}, function (err) {
-  console.log('Order collection removed')
-});
+// db.
+// User.remove({}, function (err) {
+//   console.log('User collection removed')
+// });
+// RoomInstance.remove({}, function (err) {
+//   console.log('RoomInstance collection removed')
+// });
+// Room.remove({}, function (err) {
+//   console.log('Room collection removed')
+// });
+// Hotel.remove({}, function (err) {
+//   console.log('Hotel collection removed')
+// });
+// Order.remove({}, function (err) {
+//   console.log('Order collection removed')
+// });
 
 
 var users = [];

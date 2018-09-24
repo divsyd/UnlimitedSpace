@@ -34,15 +34,11 @@ export class SignupComponent implements OnInit {
   signUp() {
     this.accountservice.signup(this.signupForm.value).subscribe(
       res => {
-        console.log('signUp');
+        console.log(res);
         if (res) {
-          console.log(res['_id']);
           this.router.navigateByUrl('/user');
         }
       },
-      error => {
-        this.errorMsg = error;
-      }
     );
   }
 }

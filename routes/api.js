@@ -51,6 +51,7 @@ router.get('/roominstance', (req, res) => {
         });
 });
 
+// User api
 router.post('/users/signup', UserController.registration);
 router.post('/users/login', UserController.loginUser);
 
