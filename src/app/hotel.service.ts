@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Hotel } from './hotel';
+import { environment } from './../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,7 +14,7 @@ const httpOptions = {
 })
 export class HotelService {
 
-  private hotelUrl = 'api/hotel';  // URL to web api
+  private hotelUrl = environment.apiUrl + '/hotel';  // URL to web api
 
   constructor(
     private http: HttpClient

@@ -4,7 +4,7 @@ console.log('This script populates some data for our database. Specified databas
 
 // Get arguments passed on command line
 var userArgs = process.argv.slice(2);
-if (!userArgs[0].startsWith('mongodb://')) {
+if (!userArgs[0]) {
   console.log('ERROR: You need to specify a valid mongodb URL as the first argument');
   return
 }
