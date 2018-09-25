@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcrypt');
-const bcryptNode = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 
 module.exports = class UserController {

@@ -61,9 +61,15 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 
 		 ng build
 		
-1. Start web server
+1. Start backend api
 
     npm start
+
+1. Start the front end
+
+	ng serve
+
+1. Connect to frontend: [http://localhost:4200/](http://localhost:4200/)
     
 Testing User account
   1.  test3@account.com 
