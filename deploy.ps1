@@ -114,7 +114,9 @@ selectNodeVersion
 if (Test-Path "$DEPLOYMENT_TARGET\package.json") {
     pushd "$DEPLOYMENT_TARGET"
     try {
+        $env:path = $env:path.replace("D:\Program Files (x86)\MSBuild\14.0\Bin","D:\Program Files (x86)\MSBuild-15.3.409.57025\MSBuild\15.0\Bin")
         iex "$NPM_CMD config set msvs_version 2017"
+
         iex "$NPM_CMD install --production"
     } catch {
         exitWithMessageOnError "npm failed"
