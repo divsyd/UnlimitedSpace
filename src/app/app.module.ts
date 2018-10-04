@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { AppComponent } from './app.component';
 import { HotelsComponent } from './hotels/hotels.component';
-import { HotelRoomsComponent } from './hotel-rooms/hotel-rooms.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
 import { OrdersComponent } from './orders/orders.component';
@@ -24,12 +23,14 @@ import {  MatTableModule,
           MatSortModule } from '@angular/material';
 import {AuthInterceptor} from './servers/account/auth-interceptor';
 import { OrderTableComponent } from './order-table/order-table.component';
+import { HotelDetailComponent } from './hotel-detail/hotel-detail.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { HotelComponent } from './hotel/hotel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HotelsComponent,
-    HotelRoomsComponent,
     LoginComponent,
     OrdersComponent,
     UserComponent,
@@ -38,7 +39,10 @@ import { OrderTableComponent } from './order-table/order-table.component';
     MessagesComponent,
     SearchComponent,
     SignupComponent,
-    OrderTableComponent
+    OrderTableComponent,
+    HotelDetailComponent,
+    RoomsComponent,
+    HotelComponent
   ],
   imports: [
     BrowserModule,

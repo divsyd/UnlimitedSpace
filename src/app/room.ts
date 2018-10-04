@@ -5,4 +5,5 @@ export class Room {
   hotel: string;
   maxGuest: number;
   bedrooms: number;
+  price: number;
 }

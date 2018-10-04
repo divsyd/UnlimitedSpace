@@ -92,8 +92,8 @@ function hotelCreate(name, address, city, country, cb) {
   });
 }
 
-function roomCreate(name, hotel, maxGuest, bedrooms, cb) {
-  roomDetail = { name: name, hotel: hotel, maxGuest: maxGuest, bedrooms: bedrooms }
+function roomCreate(name, hotel, maxGuest, bedrooms, price, cb) {
+  roomDetail = { name: name, hotel: hotel, maxGuest: maxGuest, bedrooms: bedrooms, price: price }
 
   var room = new Room(roomDetail);
 
@@ -173,19 +173,19 @@ function createHotels(cb) {
 function createRooms(cb) {
   async.parallel([
       function (callback) {
-        roomCreate('Standard room', hotels[0], 4, 2, callback);
+        roomCreate('Standard room', hotels[0], 4, 2, 100, callback);
       },
       function (callback) {
-        roomCreate('Delux Suite', hotels[0], 8, 4, callback);
+        roomCreate('Delux Suite', hotels[0], 8, 4, 150, callback);
       },
       function (callback) {
-        roomCreate('Dorm', hotels[1], 1, 1, callback);
+        roomCreate('Dorm', hotels[1], 1, 1, 70, callback);
       },
       function (callback) {
-        roomCreate('Standard room', hotels[1], 2, 1, callback);
+        roomCreate('Standard room', hotels[1], 2, 1, 130, callback);
       },
       function (callback) {
-        roomCreate('Twin room', hotels[1], 4, 1, callback);
+        roomCreate('Twin room', hotels[1], 4, 1, 110, callback);
       },
     ],
     // optional callback
