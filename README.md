@@ -40,7 +40,7 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 
     - An alternate option is to run Mongo in a docker conntainer
 
-        	docker run --name mongodb -p 27017:27017 --rm mongo:4.0.1
+			docker run --name mongodb -p 27017:27017 --rm mongo:4.0.1
 
 1. Start mondodb
 
@@ -55,7 +55,7 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 
 	- Populate cloud DB with:
 
-			node ./populateDb mongodb+srv://dbuser:PASSWORD@cluster0-d1fpj.mongodb.net/test?retryWrites=true
+			node ./populateDb mongodb+srv://dbuser:PASSWORD@cluster0-d1fpj.mongodb.net/unlimitedSpaceDb?retryWrites=true
 		
 1. Build Angular frontend
 
