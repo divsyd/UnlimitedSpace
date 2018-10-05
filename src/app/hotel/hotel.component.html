@@ -1,9 +1,17 @@
-<p>
-  hotel works!
-  {{hotel.name}}
-</p>
-  <div *ngFor="let room of rooms$ | async">
-{{room.name}}
-{{room.price}}
+<div class="card">
+  <a routerLink="/hotel/{{hotel._id}}">
+    <img class="card-img-top" src="{{hotel.img}}" alt="Card image">
+  </a>
+  <div class="card-body">
+    <a routerLink="/hotel/{{hotel._id}}" class="heading-link">
+      <h4 class="card-title">{{hotel.name}}</h4>
+    </a>
+    <p class="card-text">{{hotel.description}}</p>
+    <div *ngFor="let room of rooms$ | async">
+      <p>
+        {{room.name}} from ${{room.price}} AUD per night.
+      </p>
+    </div>
+    <a routerLink="/hotel/{{hotel._id}}" class="btn btn-primary" role="button">Choose Room</a>
   </div>
-
+</div>

@@ -15,31 +15,13 @@ import { take, map, tap } from 'rxjs/operators';
 })
 export class HotelsComponent implements OnInit {
   hotels$: Observable<Hotel[]>;
-  rooms$: Observable<Room[]>;
 
   constructor(
     private hotelService: HotelService,
-    private roomService: RoomService
   ) { }
 
   ngOnInit() {
-    this.hotels$ = this.hotelService.getHotels().pipe(
-      tap(hotels => hotels.forEach(
-        hotel => this.rooms$ = this.roomService.getRoomByHotel(hotel._id)
-      ))
-    );
+    this.hotels$ = this.hotelService.getHotels();
   }
-
-  getCheapestRoom(roomid: string): void {
-    this.rooms$ = this.roomService.getRoomByHotel(roomid).pipe(
-      tap(x => console.log("before sort", x)),
-      map(rooms => rooms.sort(
-        (a, b) => a.price - b.price
-      )),
-      // take(1),
-      tap(x => console.log("sorted room", x))
-    )
-  }
-
 
 }

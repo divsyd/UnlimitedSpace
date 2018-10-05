@@ -23,7 +23,7 @@ var mongoDB = userArgs[0];
 mongoose.connect(mongoDB);
 connectedDb = mongoose.connection;
 // delete the whole database to remove existing index
-connectedDb.on('open',( ()=>{
+connectedDb.on('open', (() => {
   connectedDb.db.dropDatabase();
 }));
 mongoose.Promise = global.Promise;
@@ -50,8 +50,6 @@ mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection 
 
 
 var users = [];
-var hotels = [];
-var rooms = [];
 var roomInstances = [];
 var orders = [];
 
@@ -61,7 +59,8 @@ function userCreate(email, username, password, date_of_birth, phone, cb) {
     password: password,
     date_of_birth: date_of_birth,
     email: email,
-    phone: phone };
+    phone: phone
+  };
 
   var user = new User(userDetail);
 
@@ -76,37 +75,40 @@ function userCreate(email, username, password, date_of_birth, phone, cb) {
   });
 }
 
-function hotelCreate(name, address, city, country, cb) {
-  hotelDetail = { name: name, address: address, city: city, country: country };
+const hotels = [
+  Hotel({
+    name: "Hilton Hotel", address: '123 Sydney Road', city: 'Sydney', country: 'Australia', description: "Luxury hotel located in the heart of the city", img: 'assets/images/hilton-sydney-400-266.jpg'
+  }),
+  Hotel({
+    name: 'Sydney backpackers', address: '1 hat Road', city: 'Sydney', country: 'Australia', description: "Budget pricing and central location", img: 'assets/images/sydney-yha-400-266.jpg'
+  })
+]
 
-  var hotel = new Hotel(hotelDetail);
+Hotel.insertMany(
+  hotels
+)
 
-  hotel.save(function (err) {
-    if (err) {
-      cb(err, null)
-      return
-    }
-    console.log('New Hotel: ' + hotel);
-    hotels.push(hotel)
-    cb(null, hotel)
-  });
-}
+const rooms = [
+  Room({
+    name: 'Standard room', hotel: hotels[0], maxGuest: 4, bedrooms: 2, price: 100
+  }),
+  Room({
+    name: 'Delux Suite', hotel: hotels[0], maxGuest: 8, bedrooms: 4, price: 150
+  }),
+  Room({
+    name: 'Dorm', hotel: hotels[1], maxGuest: 1, bedrooms: 1, price: 70
+  }),
+  Room({
+    name: 'Standard room', hotel: hotels[1], maxGuest: 2, bedrooms: 1, price: 130
+  }),
+  Room({
+    name: 'Twin room', hotel: hotels[1], maxGuest: 1, bedrooms: 1, price: 110
+  })
+]
 
-function roomCreate(name, hotel, maxGuest, bedrooms, price, cb) {
-  roomDetail = { name: name, hotel: hotel, maxGuest: maxGuest, bedrooms: bedrooms, price: price }
-
-  var room = new Room(roomDetail);
-
-  room.save(function (err) {
-    if (err) {
-      cb(err, null)
-      return
-    }
-    console.log('New Room: ' + room);
-    rooms.push(room)
-    cb(null, room)
-  });
-}
+Room.insertMany(
+  rooms
+)
 
 function roomInstanceCreate(room, status, cb) {
   roomInstanceDetail = { room: room, status: status };
@@ -143,51 +145,14 @@ function orderCreate(roomInstance, user, numNights, cb) {
 // first_name, family_name, date_of_birth, email, phone
 function createUsers(cb) {
   async.parallel([
-      function (callback) {
-        userCreate('test3@account.com', 'test3User', '$2a$10$QfAZ6EeSXyrW5d1wRWEB/.uJTO1KXg76nxFz0os91SasBWf3d.Ig2',new Date(),
-          '0420290211', callback)
-      },
-      function (callback) {
-        userCreate('test4@account.com', 'test2User', "$2a$10$9BKZECM6pQUnGd8oYGz5q.eGMMfyNUDOfEawuVZ1yMwCurTdx.g1O",new Date(), '0420290211', callback)
-      },
-    ],
-    // optional callback
-    cb);
-}
-
-// name, address, city, country, cb
-function createHotels(cb) {
-  async.parallel([
-      function (callback) {
-        hotelCreate('Hilton Hotel', '123 Sydney Road', 'Sydney', 'Australia', callback);
-      },
-      function (callback) {
-        hotelCreate('Sydney backpackers', '1 hat Road', 'Sydney', 'Australia', callback);
-      },
-    ],
-    // optional callback
-    cb);
-}
-
-// name, hotel, maxGuest, rooms, cb
-function createRooms(cb) {
-  async.parallel([
-      function (callback) {
-        roomCreate('Standard room', hotels[0], 4, 2, 100, callback);
-      },
-      function (callback) {
-        roomCreate('Delux Suite', hotels[0], 8, 4, 150, callback);
-      },
-      function (callback) {
-        roomCreate('Dorm', hotels[1], 1, 1, 70, callback);
-      },
-      function (callback) {
-        roomCreate('Standard room', hotels[1], 2, 1, 130, callback);
-      },
-      function (callback) {
-        roomCreate('Twin room', hotels[1], 4, 1, 110, callback);
-      },
-    ],
+    function (callback) {
+      userCreate('test3@account.com', 'test3User', '$2a$10$QfAZ6EeSXyrW5d1wRWEB/.uJTO1KXg76nxFz0os91SasBWf3d.Ig2', new Date(),
+        '0420290211', callback)
+    },
+    function (callback) {
+      userCreate('test4@account.com', 'test2User', "$2a$10$9BKZECM6pQUnGd8oYGz5q.eGMMfyNUDOfEawuVZ1yMwCurTdx.g1O", new Date(), '0420290211', callback)
+    },
+  ],
     // optional callback
     cb);
 }
@@ -195,34 +160,34 @@ function createRooms(cb) {
 // room, status, reservedUntil, cb
 function createRoomInstances(cb) {
   async.parallel([
-      function (callback) {
-        roomInstanceCreate(rooms[0], "Available", callback);
-      },
-      function (callback) {
-        roomInstanceCreate(rooms[0], "Maintenance", callback);
-      },
-      function (callback) {
-        roomInstanceCreate(rooms[1], "Reserved", callback);
-      },
-      function (callback) {
-        roomInstanceCreate(rooms[1], "Available", callback);
-      },
-      function (callback) {
-        roomInstanceCreate(rooms[2], "Available", callback);
-      },
-      function (callback) {
-        roomInstanceCreate(rooms[2], "Reserved", callback);
-      },
-      function (callback) {
-        roomInstanceCreate(rooms[3], "Available", callback);
-      },
-      function (callback) {
-        roomInstanceCreate(rooms[3], "Available", callback);
-      },
-      function (callback) {
-        roomInstanceCreate(rooms[4], "Available", callback);
-      },
-    ],
+    function (callback) {
+      roomInstanceCreate(rooms[0], "Available", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[0], "Maintenance", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[1], "Reserved", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[1], "Available", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[2], "Available", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[2], "Reserved", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[3], "Available", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[3], "Available", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[4], "Available", callback);
+    },
+  ],
     // optional callback
     cb);
 }
@@ -230,24 +195,22 @@ function createRoomInstances(cb) {
 // roomInstance, user, numNights
 function createOrders(cb) {
   async.parallel([
-      function (callback) {
-        orderCreate(roomInstances[0], users[0], 1, callback);
-      },
-      function (callback) {
-        orderCreate(roomInstances[1], users[1], 2, callback);
-      },
-    ],
+    function (callback) {
+      orderCreate(roomInstances[0], users[0], 1, callback);
+    },
+    function (callback) {
+      orderCreate(roomInstances[1], users[1], 2, callback);
+    },
+  ],
     // optional callback
     cb);
 }
 
 async.series([
-    createUsers,
-    createHotels,
-    createRooms,
-    createRoomInstances,
-    createOrders
-  ],
+  createUsers,
+  createRoomInstances,
+  createOrders
+],
   // Optional callback
   function (err, results) {
     if (err) {

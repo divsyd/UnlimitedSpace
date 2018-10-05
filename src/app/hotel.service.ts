@@ -25,7 +25,7 @@ export class HotelService {
     return this.http.get<Hotel[]>(this.hotelUrl)
       .pipe(
         catchError(this.handleError('getHotels', [])),
-        tap(x => console.log('getHotels', x))
+        // tap(x => console.log('getHotels', x))
       );
   }
 
@@ -34,7 +34,7 @@ export class HotelService {
     const url = `${this.hotelUrl}/${id}`;
     return this.http.get<Hotel>(url).pipe(
       catchError(this.handleError<Hotel>(`getHotel id=${id}`)),
-      tap(x => console.log('getHotel', x))
+      // tap(x => console.log('getHotel', x))
     );
   }
 

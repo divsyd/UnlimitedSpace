@@ -25,7 +25,7 @@ export class RoomService {
     return this.http.get<Room[]>(this.roomUrl)
       .pipe(
         catchError(this.handleError('getRooms', [])),
-        tap(x => console.log('getRooms', x))
+        // tap(x => console.log('getRooms', x))
       );
   }
 
@@ -45,7 +45,10 @@ export class RoomService {
       .pipe(
         catchError(this.handleError('getRooms', [])),
         map(rooms => rooms.filter(room => room.hotel === id)),
-        tap(x => console.log('getRoomByHotel', x))
+        map(rooms => rooms.sort(
+          (a, b) => a.price - b.price
+        )),
+        // tap(x => console.log('getRoomByHotel', x))
       );
   }
 

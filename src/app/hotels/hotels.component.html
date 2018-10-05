@@ -1,27 +1,11 @@
 <div class="container">
-  <h2>Hotels</h2>
-  <!--TODO Using left to right display the hotel
-    try to use picture -->
+  <h2>Find the best deals for hotels and book your next holiday now</h2>
 
-  <!--<div class="input-group mb-3">
-    <input type="text" #searchBox id="search-box" class="form-control" placeholder="Enter your search terms" />
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button">Search</button>
-    </div>
-  </div>-->
   <app-search></app-search>
 
-  <div class="row">
-    <ul>
-      <li *ngFor="let hotel of hotels$ | async">
-        <h3>
-          <a routerLink="/hotel/{{hotel._id}}">
-            {{hotel.name}}
-          </a>
-        </h3>
-            <app-hotel [hotel]="hotel"></app-hotel>
-        <!-- {{getCheapestRoom(hotel._id)}} -->
-      </li>
-    </ul>
+  <div class="card-deck">
+    <div *ngFor="let hotel of hotels$ | async">
+      <app-hotel [hotel]="hotel"></app-hotel>
+    </div>
   </div>
 </div>

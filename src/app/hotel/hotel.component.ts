@@ -15,18 +15,13 @@ export class HotelComponent implements OnInit {
 
   @Input() hotel: Hotel;
   rooms$: Observable<Room[]>;
-  room: Room;
 
   constructor(private roomService: RoomService) { }
 
   ngOnInit() {
     this.rooms$ = this.roomService.getRoomByHotel(this.hotel._id).pipe(
-      tap(x => console.log("before sort", x)),
-      map(rooms => rooms.sort(
-        (a, b) => a.price - b.price
-      )),
-      take(1),
-      tap(x => console.log("sorted room", x))
+      // Select only first room which is cheapest
+      map(rooms => [rooms[0]]),
     )
   }
 
