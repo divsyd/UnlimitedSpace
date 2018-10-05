@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Observable} from 'rxjs';
 import { User } from '../../../../models/user';
 import { Router } from '@angular/router';
+import { Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 
 export class AccountServiceService {
   private token: string;
+  private authStatusListener = new Subject<boolean>();
   private BASE_URL: String = 'http://localhost:8000/api/users/';
   constructor(private http: HttpClient,
               private router: Router ) { }
@@ -19,23 +21,30 @@ export class AccountServiceService {
   getToken() {
     return this.token;
   }
+
+  getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
+  }
   login(user: User) {
     return this.http.post<{token: string}>(this.BASE_URL + 'login', user)
       .subscribe(response => {
-        const token = response.token;
-        this.token = token;
-        if (token) {
-          this.router.navigateByUrl('/user');
-        }
+        this.duplicated(response);
       });
   }
   // Signup function
-  signup(user: User): Observable<any> {
-    return this.http.post(this.BASE_URL + 'signup', user)
-      .pipe(map((res ) => {
-          return res ;
+  signup(user: User) {
+    return this.http.post<{token: string}>(this.BASE_URL + 'signup', user)
+      .subscribe(response => {
+        this.duplicated(response);
         }
-      ));
+      );
   }
+
+  duplicated(res) {
+    const token = res.token;
+    this.token = token;
+    this.authStatusListener.next(true);
+    this.router.navigateByUrl('/user');
+    }
   }
 

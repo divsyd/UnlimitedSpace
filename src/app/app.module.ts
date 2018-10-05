@@ -16,8 +16,14 @@ import { SearchComponent } from './search/search.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import {  MatTableModule,
+          MatInputModule,
+          MatCardModule,
+          MatButtonModule,
+          MatPaginatorModule,
+          MatSortModule } from '@angular/material';
 import {AuthInterceptor} from './servers/account/auth-interceptor';
+import { OrderTableComponent } from './order-table/order-table.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,8 @@ import {AuthInterceptor} from './servers/account/auth-interceptor';
     PageNotFoundComponent,
     MessagesComponent,
     SearchComponent,
-    SignupComponent
+    SignupComponent,
+    OrderTableComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,10 @@ import {AuthInterceptor} from './servers/account/auth-interceptor';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

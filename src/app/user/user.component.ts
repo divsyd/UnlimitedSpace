@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {OrderService} from '../order.service';
 
 
 
@@ -8,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
-  constructor() { }
+  constructor(private orderServices: OrderService) { }
 
   ngOnInit() {
   }

@@ -13,10 +13,12 @@ module.exports = class UserController {
         });
         user.save()
           .then(result => {
+            const token = jwt.sign({email: req.body.email}, 'secret', {expiresIn: "1h"});
             res.status(201).json({
               message: 'User created!',
-              result: result
-            });
+              token: token,
+              result: result }
+            );
           })
           .catch(err => {
             res.status(500).json({

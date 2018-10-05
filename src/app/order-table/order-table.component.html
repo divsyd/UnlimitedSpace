@@ -1,0 +1,41 @@
+<div class="mat-elevation-z8">
+  <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row._id}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="numNights">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>NumberNights</th>
+      <td mat-cell *matCellDef="let row">{{row.numNights}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="reservationDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>reservationDate</th>
+    <td mat-cell *matCellDef="let row">{{row.reservationDate}}</td>
+  </ng-container>
+
+    <ng-container matColumnDef="pay">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <button> Pay </button></td>
+    </ng-container>
+
+    <ng-container matColumnDef="cancel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row"><button> cancel </button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!--<mat-paginator #paginator-->
+    <!--[length]="dataSource.data.length"-->
+    <!--[pageIndex]="0"-->
+    <!--[pageSize]="100"-->
+    <!--[pageSizeOptions]="[5, 25, 50, 100, 250]">-->
+  <!--</mat-paginator>-->
+</div>

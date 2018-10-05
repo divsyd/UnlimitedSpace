@@ -9,13 +9,19 @@
   </div>
   <ul class="navbar-nav ml-auto">
     <li class="nav-item navbar-brand">
+      <a style="text-decoration:none" routerLink="/user">My Profile</a>
+    </li>
+    <li class="nav-item navbar-brand">
       <a style="text-decoration:none" routerLink="/order">My Order</a>
     </li>
-    <li class="nav-item navbar-brand">
+    <li  *ngIf="!userIsAuthenticated" class="nav-item navbar-brand">
       <a style="text-decoration:none" routerLink="/users/signup">Sign Up</a>
     </li>
-    <li class="nav-item navbar-brand">
+    <li *ngIf="!userIsAuthenticated" class="nav-item navbar-brand">
       <a style="text-decoration:none" routerLink="/users/login">Login</a>
+    </li>
+    <li *ngIf="userIsAuthenticated" class="nav-item navbar-brand">
+      <button mat-button>Logout</button>
     </li>
   </ul>
 </nav>

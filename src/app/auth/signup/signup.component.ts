@@ -32,13 +32,6 @@ export class SignupComponent implements OnInit {
     });
   }
   signUp() {
-    this.accountservice.signup(this.signupForm.value).subscribe(
-      res => {
-        console.log(res);
-        if (res) {
-          this.router.navigateByUrl('/user');
-        }
-      },
-    );
+    this.accountservice.signup(this.signupForm.value);
   }
 }
