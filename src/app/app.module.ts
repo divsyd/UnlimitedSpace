@@ -20,7 +20,8 @@ import {  MatTableModule,
           MatCardModule,
           MatButtonModule,
           MatPaginatorModule,
-          MatSortModule } from '@angular/material';
+          MatSortModule,
+          MatProgressSpinnerModule } from '@angular/material';
 import {AuthInterceptor} from './servers/account/auth-interceptor';
 import { OrderTableComponent } from './order-table/order-table.component';
 import { HotelDetailComponent } from './hotel-detail/hotel-detail.component';
@@ -57,7 +58,8 @@ import { HotelComponent } from './hotel/hotel.component';
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

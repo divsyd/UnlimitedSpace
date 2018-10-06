@@ -8,6 +8,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {SignupComponent} from './auth/signup/signup.component';
+import {AuthGuard} from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/hotels', pathMatch: 'full' },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'room/:id', component: RoomDetailComponent },
   { path: 'order', component: OrdersComponent },
   { path: 'order/:id', component: OrdersComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'users/login', component: LoginComponent },
   { path: 'users/signup', component: SignupComponent },
   { path: '**', component: PageNotFoundComponent}
@@ -24,6 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

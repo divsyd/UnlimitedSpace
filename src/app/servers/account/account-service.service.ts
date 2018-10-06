@@ -13,6 +13,7 @@ import { Subject} from 'rxjs';
 
 export class AccountServiceService {
   private token: string;
+  private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
   private BASE_URL: String = 'http://localhost:8000/api/users/';
   constructor(private http: HttpClient,
@@ -20,6 +21,10 @@ export class AccountServiceService {
 
   getToken() {
     return this.token;
+  }
+
+  getIsAuth() {
+    return this.isAuthenticated
   }
 
   getAuthStatusListener() {
@@ -43,8 +48,19 @@ export class AccountServiceService {
   duplicated(res) {
     const token = res.token;
     this.token = token;
-    this.authStatusListener.next(true);
-    this.router.navigateByUrl('/user');
+    if (token ) {
+      this.isAuthenticated = true;
+      this.authStatusListener.next(true);
+      this.router.navigate(['/user']);
+    }
+    }
+
+    logout() {
+      this.token = null;
+      this.isAuthenticated = false ;
+      this.authStatusListener.next(false);
+      this.router.navigate(['']);
+
     }
   }
 
