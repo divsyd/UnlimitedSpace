@@ -20,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
                             subscribe(isAuthenticated => {
       this.userIsAuthenticated = isAuthenticated;
     });
+    this.authService.autoAuthUser();
   }
 
   onLogout() {

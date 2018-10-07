@@ -17,6 +17,7 @@ module.exports = class UserController {
             res.status(201).json({
               message: 'User created!',
               token: token,
+              expiresIn: 3600,
               result: result }
             );
           })
@@ -50,6 +51,7 @@ module.exports = class UserController {
         const token = jwt.sign({email: email}, 'secret', {expiresIn: "1h"});
         res.status(200).json({
           message: 'success',
+          expiresIn: 3600,
           token: token
         })
       })
