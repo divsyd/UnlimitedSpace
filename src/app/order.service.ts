@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Order } from './order';
-import { environment } from './../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {Order} from './order';
+import {environment} from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,26 @@ import { environment } from './../environments/environment';
 export class OrderService {
   private orderUrl = environment.apiUrl + '/order';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   // Get all orders
   getAllOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.orderUrl).pipe(
       catchError(this.handleError<Order[]>(`getAllOrders`))
+    );
+  }
+
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.orderUrl, order).pipe(
+      catchError(this.handleError<Order>(`createOrder`))
+    );
+  }
+
+  deleteOrder(orderId: String): Observable<Order> {
+    const url = `${this.orderUrl}/delete/${orderId}`;
+    return this.http.delete<Order>(url).pipe(
+      catchError(this.handleError<Order>(`deleteOrder id=${orderId}`))
     );
   }
 

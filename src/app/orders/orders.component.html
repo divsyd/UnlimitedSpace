@@ -4,7 +4,7 @@
 
     <div class="row">
       <ul>
-        <li *ngFor="let order of orders">
+        <li *ngFor="let order of orders$ | async">
           <h3>
             Order No: {{order._id}}
           </h3>
@@ -22,14 +22,13 @@
               {{order.numNights}}
             </dd>
           </dl>
+          <button type="button" class="btn btn-danger space_button" (click)="cancelOrder(order);">Cancel Order</button>
         </li>
       </ul>
     </div>
 
     <div>
-      <button type="submit" class="btn btn-success space_button">confirm</button>
-      <span class=""></span>
-      <button type="button" class="btn btn-danger space_button" (click)="btnClick();">Cancel</button>
+      <button type="button" class="btn btn-danger space_button" (click)="goBack();">Back</button>
     </div>
   </div>
 </div>
