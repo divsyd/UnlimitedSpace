@@ -77,10 +77,21 @@ function userCreate(email, username, password, date_of_birth, phone, cb) {
 
 const hotels = [
   Hotel({
-    name: "Hilton Hotel", address: '123 Sydney Road', city: 'Sydney', country: 'Australia', description: "Luxury hotel located in the heart of the city", img: 'assets/images/hilton-sydney-400-266.jpg'
+    name: "Hilton Hotel", address: '123 Sydney Road', city: 'Sydney', country: 'Australia', description: "Luxury hotel located in the heart of the city", img: 'assets/images/hilton-01.jpg'
   }),
   Hotel({
-    name: 'Sydney backpackers', address: '1 hat Road', city: 'Sydney', country: 'Australia', description: "Budget pricing and central location", img: 'assets/images/sydney-yha-400-266.jpg'
+    name: 'Sydney backpackers', address: '1 hat Road', city: 'Sydney', country: 'Australia', description: "Budget pricing and central location", img: 'assets/images/sydney-yha-01.jpg'
+  }),
+  Hotel({
+    name: "Oaks Goldsbrough Apartments", address: '243 Pyrmont Street', city: 'Pyrmont', country: 'Australia', description: "Luxury hotel located in the heart of the city", img: 'assets/images/oaks-01.jpg'
+  }),
+  Hotel({
+    name: "The Hotel Windsor", address: '123 Jones Road', city: 'Melbourne', country: 'Australia', description: "Delicious food, wonderful staff, large rooms", img: 'assets/images/windsor-01.jpg'
+  }),
+  Hotel({
+    name: "Chelsea Hotel Toronto", address: '123 Sydney Road', city: 'Toronto', country: 'Canada', 
+    description: "The hotel is located conveniently in Toronto and is within a five-minute walk of Toronto Coach Terminal. It has a fitness centre, as well as a sauna, water slides and an indoor pool.", 
+    img: 'assets/images/chelsea-01.jpg'
   })
 ]
 
@@ -90,19 +101,37 @@ Hotel.insertMany(
 
 const rooms = [
   Room({
-    name: 'Standard room', hotel: hotels[0], maxGuest: 4, bedrooms: 2, price: 100
+    name: 'Standard room', hotel: hotels[0], maxGuest: 4, bedrooms: 2, price: 100, 
+    images: [
+      "assets/images/hilton-room-01.jpg","assets/images/hilton-room-02.jpg","assets/images/hilton-02.jpg","assets/images/hilton-02.jpg"
+    ]
   }),
   Room({
-    name: 'Delux Suite', hotel: hotels[0], maxGuest: 8, bedrooms: 4, price: 150
+    name: 'Delux Suite', hotel: hotels[0], maxGuest: 8, bedrooms: 4, price: 150, 
+    images: [
+      "assets/images/hilton-room2-01.jpg","assets/images/hilton-room2-02.jpg","assets/images/hilton-02.jpg","assets/images/hilton-02.jpg"
+    ]
   }),
   Room({
-    name: 'Dorm', hotel: hotels[1], maxGuest: 1, bedrooms: 1, price: 70
+    name: 'Dorm', hotel: hotels[1], maxGuest: 1, bedrooms: 1, price: 70,
+    images: [
+      "assets/images/sydney-yha-dorm-01.jpg","assets/images/sydney-yha-02.jpg","assets/images/sydney-yha-02.jpg","assets/images/sydney-yha-03.jpg",
+      "assets/images/sydney-yha-04.jpg"
+    ]
   }),
   Room({
-    name: 'Standard room', hotel: hotels[1], maxGuest: 2, bedrooms: 1, price: 130
+    name: 'Standard room', hotel: hotels[1], maxGuest: 2, bedrooms: 1, price: 130,
+    images: [
+      "assets/images/sydney-yha-standard-01.jpg","assets/images/sydney-yha-01.jpg","assets/images/sydney-yha-02.jpg","assets/images/sydney-yha-03.jpg",
+      "assets/images/sydney-yha-04.jpg"
+    ]
   }),
   Room({
-    name: 'Twin room', hotel: hotels[1], maxGuest: 1, bedrooms: 1, price: 110
+    name: 'Twin room', hotel: hotels[1], maxGuest: 1, bedrooms: 1, price: 110,
+    images: [
+      "assets/images/sydney-yha-standard-01.jpg","assets/images/hilton-room-01.jpg","assets/images/hilton-room-02.jpg","assets/images/hilton-02.jpg",
+      "assets/images/hilton-02.jpg"
+    ]
   })
 ]
 
