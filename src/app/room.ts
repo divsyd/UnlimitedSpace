@@ -6,4 +6,5 @@ export class Room {
   maxGuest: number;
   bedrooms: number;
   price: number;
+  images: [string]
 }

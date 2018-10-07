@@ -8,7 +8,8 @@ var RoomSchema = new Schema(
         hotel: {type: Schema.Types.ObjectId, ref: 'Hotel', required: true },
         maxGuest: { type: Number, required: true },
         bedrooms: { type: Number, required: true },
-        price: { type: Number, required: true }
+        price: { type: Number, required: true },
+        images: [{type: String, required: false }]
     }
 );
 

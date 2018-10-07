@@ -1,31 +1,35 @@
-<div class="container">
-  <div class="row">
-    <ul>
-      <li *ngFor="let room of rooms$ | async">
-        <div>
-          <a routerLink="/room/{{room._id}}">
+<div class="row">
+  <div class="col-lg-12 p-2" *ngFor="let room of rooms$ | async">
+    <a routerLink="/room/{{room._id}}">
+      <div class="card d-flex flex-column">
+        <div class="row">
+          <div class="col">
+            <img *ngIf="room.images" src="{{room.images[0]}}" alt="{{room.name}}">
+          </div>
+          <div class="col">
             <h4>
               {{room.name}}
             </h4>
-          </a>
+            <dl>
+              <dt>
+                Rooms:
+              </dt>
+              <dd>
+                {{room.bedrooms}}
+              </dd>
+              <dt>
+                Price per night
+              </dt>
+              <dd>
+                {{room.price}}
+              </dd>
+            </dl>
+          </div>
         </div>
-        <div>
-          <dl>
-            <dt>
-              Rooms:
-            </dt>
-            <dd>
-              {{room.bedrooms}}
-            </dd>
-            <dt>
-              Price per night
-            </dt>
-            <dd>
-              {{room.price}}
-            </dd>
-          </dl>
-        </div>
-      </li>
-    </ul>
+      </div>
+    </a>
   </div>
+
+  <button type="button" class="btn" (click)="goBack()">Back</button>
+
 </div>

@@ -1,5 +1,11 @@
+<div class="container">
 <div *ngIf="hotel">
+  <h3>{{hotel.name}}</h3>
+  <p class="font-weight-light">{{hotel.address}}, {{hotel.city}}, {{hotel.country}}</p>
+  <p>{{hotel.description}}</p>
+  <img src="{{hotel.img}}" alt="{{hotel.name}}">
   <div *ngIf="rooms$">
     <app-rooms [rooms$]="rooms$"></app-rooms>
   </div>
+</div>
 </div>

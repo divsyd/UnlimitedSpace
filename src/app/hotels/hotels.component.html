@@ -3,8 +3,8 @@
 
   <app-search></app-search>
 
-  <div class="card-deck">
-    <div *ngFor="let hotel of hotels$ | async">
+  <div class="row">
+    <div class="col-lg-6 p-2" *ngFor="let hotel of hotels$ | async">
       <app-hotel [hotel]="hotel"></app-hotel>
     </div>
   </div>

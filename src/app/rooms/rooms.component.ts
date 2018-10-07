@@ -4,6 +4,7 @@ import { RoomDetail } from '../roomDetail';
 import { RoomService } from '../room.service';
 import { Observable } from 'rxjs';
 import { Hotel } from '../hotel';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-rooms',
@@ -16,10 +17,15 @@ export class RoomsComponent implements OnInit {
   @Input() hotel$: Observable<Hotel>;
 
   constructor(
-    private roomService: RoomService
+    private roomService: RoomService,
+    private location: Location
   ) { }
 
   ngOnInit() {
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }
