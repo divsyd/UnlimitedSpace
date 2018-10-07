@@ -6,6 +6,8 @@ import { RoomDetail } from '../roomDetail';
 import { RoomService } from '../room.service';
 import { Hotel } from '../hotel';
 import { HotelService } from '../hotel.service';
+import {OrderService} from '../order.service';
+import {Order} from '../order';
 
 
 @Component({
@@ -19,6 +21,7 @@ export class RoomDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private roomService: RoomService,
     private hotelService: HotelService,
+    private orderService: OrderService,
     private location: Location
   ) { }
 
@@ -39,5 +42,21 @@ export class RoomDetailComponent implements OnInit {
     this.location.back();
   }
 
+  reserve(roomInstance: String) {
+
+    /*{
+      roomInstance: '5bb9b361369525697c31397c',
+      user: '5bb9b35e369525697c31397a',
+      numNights: 5
+    }*/
+    const order = new Order();
+    order.roomInstance = roomInstance;
+    order.user = '5bb9b35e369525697c31397a';
+    order.numNights = 5;
+
+    this.orderService.createOrder(order).subscribe(successCode => {
+      alert('create order successfully');
+    });
+  }
 }
 

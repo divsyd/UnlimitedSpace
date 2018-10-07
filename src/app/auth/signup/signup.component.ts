@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, NgForm, Validators} from '@angular/forms';
 import { AccountServiceService} from '../../servers/account/account-service.service';
 import { Router } from '@angular/router';
+import {observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -17,21 +18,30 @@ export class SignupComponent implements OnInit {
 
   getErrorMessage(type: string) {
     if (type === 'email') {
-      return this.signupForm.value.email.hasError('required') ? 'You must enter a value' :
-        this.signupForm.value.email.hasError('email') ? 'Not a valid email' :
-          '';
-    } else {
-      return this.signupForm.value.password.hasError('required') ? 'Please enter a password' :
-        this.signupForm.value.password.hasError('minLength') ? 'password 8 ' : '';
+      return of();
     }
   }
   ngOnInit() {
     this.signupForm = this.formbuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required ]
-    });
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      passwordConfirmation: ['', [Validators.required,
+                                  Validators.minLength(4)]]
+    }, this.getErrorMessage.bind(this));
   }
   signUp() {
     this.accountservice.signup(this.signupForm.value);
+  }
+
+  get email() {
+    return this.signupForm.get('email');
+  }
+
+  get password() {
+    return this.signupForm.get('password');
+  }
+
+  get passwordMismatch(): boolean {
+    return this.signupForm.get('password').dirty !== this.signupForm.get('passwordConfirmation').dirty;
   }
 }

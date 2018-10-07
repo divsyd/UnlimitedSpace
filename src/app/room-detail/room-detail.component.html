@@ -7,5 +7,6 @@
   <div><span>country: </span>{{roomDetail.hotel.country}}</div>
   <div><span>Max guests: </span>{{roomDetail.maxGuest}}</div>
   <div><span>bedrooms: </span>{{roomDetail.bedrooms}}</div>
+  <button (click)="reserve(roomDetail._id)">reserve</button>
   <button (click)="goBack()">go back</button>
 </div>

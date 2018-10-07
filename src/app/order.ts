@@ -1,8 +1,8 @@
 export class Order {
   // the order class
-  _id: string;
-  roomInstance: string;
-  user: string;
+  _id: String;
+  roomInstance: String;
+  user: String;
   reservationDate: Date;
   numNights: number;
 }

@@ -27,6 +27,7 @@ import { OrderTableComponent } from './order-table/order-table.component';
 import { HotelDetailComponent } from './hotel-detail/hotel-detail.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { HotelComponent } from './hotel/hotel.component';
+import { UserphotoComponent } from './user/userphoto/userphoto.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { HotelComponent } from './hotel/hotel.component';
     OrderTableComponent,
     HotelDetailComponent,
     RoomsComponent,
-    HotelComponent
+    HotelComponent,
+    UserphotoComponent
   ],
   imports: [
     BrowserModule,

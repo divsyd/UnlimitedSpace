@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 import {Order} from '../order';
 import {OrderService} from '../order.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-orders',
@@ -11,7 +12,7 @@ import {OrderService} from '../order.service';
 })
 export class OrdersComponent implements OnInit {
 
-  orders: Order[];
+  orders$: Observable<Order[]>;
 
   constructor(
     private orderService: OrderService,
@@ -21,18 +22,22 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllOrders();
-  }
-
-  // get all orders
-  getAllOrders(): void {
-    this.orderService.getAllOrders()
-      .subscribe(orders => this.orders = orders);
+   this.getAllOrders();
   }
 
 // back to the main page
-  btnClick(): void {
+  goBack(): void {
     this.router.navigateByUrl(``);
   }
 
+  getAllOrders() {
+    this.orders$ = this.orderService.getAllOrders();
+  }
+
+  // cancel order
+  cancelOrder(order: Order) {
+    this.orderService.deleteOrder(order._id).subscribe(successCode => {
+      this.getAllOrders();
+    });
+  }
 }

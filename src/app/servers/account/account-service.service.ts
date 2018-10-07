@@ -24,11 +24,24 @@ export class AccountServiceService {
   }
 
   getIsAuth() {
-    return this.isAuthenticated
+    return this.isAuthenticated;
   }
 
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
+  }
+
+  autoAuthUser() {
+    const authInformation = this.getLoginData();
+    if (authInformation) {
+      const now = new Date();
+      const timeValid = authInformation.expiration > now;
+      if (timeValid) {
+        this.token = authInformation.token;
+        this.isAuthenticated = true;
+        this.authStatusListener.next(true);
+      }
+    }
   }
   login(user: User) {
     return this.http.post<{token: string}>(this.BASE_URL + 'login', user)
@@ -49,8 +62,13 @@ export class AccountServiceService {
     const token = res.token;
     this.token = token;
     if (token ) {
+      const expiresDuration = res.expiresIn;
       this.isAuthenticated = true;
       this.authStatusListener.next(true);
+      const now = new Date();
+      const expiration = new Date(now.getTime() + expiresDuration * 1000);
+      console.log(expiration);
+      this.saveToken(token, expiration);
       this.router.navigate(['/user']);
     }
     }
@@ -59,8 +77,30 @@ export class AccountServiceService {
       this.token = null;
       this.isAuthenticated = false ;
       this.authStatusListener.next(false);
+      this.clearToken();
       this.router.navigate(['']);
+    }
 
+    private saveToken(token: string, expirationDate: Date) {
+      localStorage.setItem('token', token);
+      localStorage.setItem('expiration', expirationDate.toISOString());
+    }
+
+    private clearToken() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('expiration');
+    }
+
+    private getLoginData() {
+      const token = localStorage.getItem('token');
+      const expiration = localStorage.getItem('expiration');
+      if (!token || !expiration) {
+        return null;
+      }
+      return {
+        token: token,
+        expiration: new Date(expiration)
+      };
     }
   }
 

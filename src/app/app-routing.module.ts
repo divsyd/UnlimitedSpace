@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'room/:id', component: RoomDetailComponent },
   { path: 'order', component: OrdersComponent },
   { path: 'order/:id', component: OrdersComponent },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent },
   { path: 'users/login', component: LoginComponent },
   { path: 'users/signup', component: SignupComponent },
   { path: '**', component: PageNotFoundComponent}
