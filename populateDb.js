@@ -132,6 +132,24 @@ const rooms = [
       "assets/images/sydney-yha-standard-01.jpg","assets/images/hilton-room-01.jpg","assets/images/hilton-room-02.jpg","assets/images/hilton-02.jpg",
       "assets/images/hilton-02.jpg"
     ]
+  }),
+  Room({
+    name: 'Standard room', hotel: hotels[2], maxGuest: 4, bedrooms: 2, price: 100, 
+    images: [
+      "assets/images/hilton-room-01.jpg","assets/images/hilton-room-02.jpg","assets/images/hilton-02.jpg","assets/images/hilton-02.jpg"
+    ]
+  }),
+  Room({
+    name: 'Standard room', hotel: hotels[3], maxGuest: 4, bedrooms: 2, price: 100, 
+    images: [
+      "assets/images/hilton-room-01.jpg","assets/images/hilton-room-02.jpg","assets/images/hilton-02.jpg","assets/images/hilton-02.jpg"
+    ]
+  }),
+  Room({
+    name: 'Standard room', hotel: hotels[4], maxGuest: 4, bedrooms: 2, price: 100, 
+    images: [
+      "assets/images/hilton-room-01.jpg","assets/images/hilton-room-02.jpg","assets/images/hilton-02.jpg","assets/images/hilton-02.jpg"
+    ]
   })
 ]
 
@@ -215,6 +233,15 @@ function createRoomInstances(cb) {
     },
     function (callback) {
       roomInstanceCreate(rooms[4], "Available", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[5], "Available", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[6], "Available", callback);
+    },
+    function (callback) {
+      roomInstanceCreate(rooms[7], "Available", callback);
     },
   ],
     // optional callback
