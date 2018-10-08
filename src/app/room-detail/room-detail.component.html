@@ -7,6 +7,16 @@
   <div><span>country: </span>{{roomDetail.hotel.country}}</div>
   <div><span>Max guests: </span>{{roomDetail.maxGuest}}</div>
   <div><span>bedrooms: </span>{{roomDetail.bedrooms}}</div>
+  <div class="row">
+    <div class="col-xs-12 col-12 col-md-4 form-group">
+      <input type="text"
+             placeholder="please select your data range"
+             class="form-control"
+             [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+             [(ngModel)]="daterangepickerModel"
+             bsDaterangepicker>
+    </div>
+  </div>
   <button (click)="reserve(roomDetail._id)">reserve</button>
   <button (click)="goBack()">go back</button>
 </div>

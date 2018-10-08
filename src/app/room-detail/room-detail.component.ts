@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { Room } from '../room';
-import { RoomDetail } from '../roomDetail';
-import { RoomService } from '../room.service';
-import { Hotel } from '../hotel';
-import { HotelService } from '../hotel.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
+import {RoomDetail} from '../roomDetail';
+import {RoomService} from '../room.service';
+import {HotelService} from '../hotel.service';
 import {OrderService} from '../order.service';
 import {Order} from '../order';
 
@@ -23,8 +21,10 @@ export class RoomDetailComponent implements OnInit {
     private hotelService: HotelService,
     private orderService: OrderService,
     private location: Location
-  ) { }
+  ) {
+  }
 
+  daterangepickerModel: Date[];
   roomDetail: RoomDetail;
 
   ngOnInit(): void {
@@ -51,7 +51,9 @@ export class RoomDetailComponent implements OnInit {
     }*/
     const order = new Order();
     order.roomInstance = roomInstance;
-    order.user = '5bb9b35e369525697c31397a';
+    order.user = localStorage.getItem('userId');
+    order.fromDate = this.daterangepickerModel[0];
+    order.toDate = this.daterangepickerModel[1];
     order.numNights = 5;
 
     this.orderService.createOrder(order).subscribe(successCode => {

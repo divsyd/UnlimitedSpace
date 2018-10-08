@@ -32,6 +32,8 @@ router.post('/',(req, res) => {
   const order = new Order({
     roomInstance: req.body.roomInstance,
     user: req.body.user,
+    fromDate: req.body.fromDate,
+    toDate: req.body.toDate,
     numNights: req.body.numNights
   });
   order.save()

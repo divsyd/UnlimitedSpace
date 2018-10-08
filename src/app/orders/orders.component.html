@@ -10,17 +10,17 @@
           </h3>
           <dl>
             <dt>
-              Reservation Date:
+              Reservation Date: {{order.reservationDate}}
             </dt>
-            <dd>
-              {{order.reservationDate}}
-            </dd>
             <dt>
-              Number of Nights
+              From Date: {{order.fromDate}}
             </dt>
-            <dd>
-              {{order.numNights}}
-            </dd>
+            <dt>
+              To Date: {{order.toDate}}
+            </dt>
+            <dt>
+              Number of Nights: {{order.numNights}}
+            </dt>
           </dl>
           <button type="button" class="btn btn-danger space_button" (click)="cancelOrder(order);">Cancel Order</button>
         </li>

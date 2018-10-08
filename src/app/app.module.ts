@@ -28,7 +28,7 @@ import { HotelDetailComponent } from './hotel-detail/hotel-detail.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { HotelComponent } from './hotel/hotel.component';
 import { UserphotoComponent } from './user/userphoto/userphoto.component';
-import {ErrorInterceptor} from './error-interceptor';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -62,10 +62,10 @@ import {ErrorInterceptor} from './error-interceptor';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    BsDatepickerModule.forRoot()
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-              {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

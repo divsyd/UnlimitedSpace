@@ -174,7 +174,13 @@ function roomInstanceCreate(room, status, cb) {
 }
 
 function orderCreate(roomInstance, user, numNights, cb) {
-  orderDetail = { roomInstance: roomInstance, user: user, numNights: numNights };
+  orderDetail = {
+    roomInstance: roomInstance,
+    user: user,
+    numNights: numNights,
+    fromDate: Date.now(),
+    toDate: Date.now()
+  };
 
   var order = new Order(orderDetail);
 
