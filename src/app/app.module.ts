@@ -28,6 +28,7 @@ import { HotelDetailComponent } from './hotel-detail/hotel-detail.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { HotelComponent } from './hotel/hotel.component';
 import { UserphotoComponent } from './user/userphoto/userphoto.component';
+import {ErrorInterceptor} from './error-interceptor';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { UserphotoComponent } from './user/userphoto/userphoto.component';
     MatSortModule,
     MatProgressSpinnerModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+              {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

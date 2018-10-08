@@ -5,6 +5,11 @@ const jwt = require('jsonwebtoken');
 
 module.exports = class UserController {
   static registration(req, res) {
+    if (req.body.password !== req.body.passwordConfirmation) {
+      return res.status(401).json({
+        message: "the two password is not equal"
+      });
+    }
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
         const user = new User({
@@ -15,14 +20,16 @@ module.exports = class UserController {
           .then(result => {
             const token = jwt.sign({email: req.body.email}, 'secret', {expiresIn: "1h"});
             res.status(201).json({
-              message: 'User created!',
-              token: token,
-              expiresIn: 3600,
-              result: result }
+                message: 'User created!',
+                token: token,
+                expiresIn: 3600,
+                result: result
+              }
             );
           })
           .catch(err => {
             res.status(500).json({
+              message: "email has been used",
               error: err
             });
           });
@@ -45,7 +52,7 @@ module.exports = class UserController {
       .then(result => {
         if (!result) {
           return res.status(401).json({
-            message: "password failed !"
+            message: "password error !"
           });
         }
         const token = jwt.sign({email: email}, 'secret', {expiresIn: "1h"});

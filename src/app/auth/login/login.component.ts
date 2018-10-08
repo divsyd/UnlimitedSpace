@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountServiceService} from '../../servers/account/account-service.service';
 import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  private authStatus: Subscription;
   loginForm: FormGroup;
   errorMsg: String = '';
 
@@ -23,6 +25,10 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+    this.authStatus = this.accountservice
+      .getAuthStatusListener()
+      .subscribe( auth => {},
+        error => {});
   }
 
 // direct to an user
@@ -33,5 +39,9 @@ export class LoginComponent implements OnInit {
 
   loginUser(): void {
     this.accountservice.login(this.loginForm.value);
+  }
+
+  ngOnDestroy() {
+    this.authStatus.unsubscribe();
   }
 }

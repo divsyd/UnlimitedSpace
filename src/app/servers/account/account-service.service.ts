@@ -44,18 +44,20 @@ export class AccountServiceService {
     }
   }
   login(user: User) {
-    return this.http.post<{token: string}>(this.BASE_URL + 'login', user)
+    this.http.post<{token: string}>(this.BASE_URL + 'login', user)
       .subscribe(response => {
         this.duplicated(response);
-      });
+      }, error => {
+        this.authStatusListener.next(false);});
   }
   // Signup function
   signup(user: User) {
-    return this.http.post<{token: string}>(this.BASE_URL + 'signup', user)
+    this.http.post<{token: string}>(this.BASE_URL + 'signup', user)
       .subscribe(response => {
         this.duplicated(response);
-        }
-      );
+        }, error => {
+          this.authStatusListener.next(false);
+        });
   }
 
   duplicated(res) {
