@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = class UserController {
   static registration(req, res) {
-    let userId = ''
+    let userId = '';
     if (req.body.password !== req.body.passwordConfirmation) {
       return res.status(401).json({
         message: "the two password is not equal"
