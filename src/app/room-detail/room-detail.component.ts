@@ -43,7 +43,10 @@ export class RoomDetailComponent implements OnInit {
   }
 
   reserve(roomInstance: String) {
-
+    if (localStorage.getItem('token') == null) {
+      alert('login');
+      return;
+    }
     /*{
       roomInstance: '5bb9b361369525697c31397c',
       user: '5bb9b35e369525697c31397a',
