@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 // direct to an user
   btnClick(): void {
-    this.router.navigateByUrl('/user');
+    this.router.navigateByUrl('/');
 
   }
 

@@ -1,15 +1,30 @@
-<div class="container">
-  <h1>Login</h1>
-  {{errorMsg}} <br>
-  <div class="row">
-    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-      email <input type="text" formControlName="email">
-      <br>
-       password <input type="password" formControlName="password">
-      <br>
-      <input class="btn btn-primary" type="submit" value="Login" [disabled]="loginForm.invalid">
-    </form>
-  </div>
+<mat-card >
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+    <mat-card-title>
+      <div> Log in </div>
+    </mat-card-title>
+    <mat-form-field class="mat-form-field-flex">
+      <input matInput
+             placeholder="Enter your email"
+             name="email"
+             formControlName="email"
+             required>
+    </mat-form-field>
+    <mat-form-field class="mat-form-field-flex">
+      <input type="password"
+             matInput
+             placeholder="Password"
+             name="password"
+             formControlName="password"
+             required>
+    </mat-form-field>
+      <button mat-raised-button
+              color="primary"
+              type="submit"
+      >Log in</button>
+  </form>
+</mat-card>
 
 
-</div>
+
+

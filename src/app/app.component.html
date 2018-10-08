@@ -18,7 +18,7 @@
       <a style="text-decoration:none" routerLink="/users/login">Login</a>
     </li>
     <li *ngIf="userIsAuthenticated" class="nav-item navbar-brand">
-      <button mat-button (click)="onLogout()">Logout</button>
+      <button mat-flat-button color="warn" (click)="onLogout()">Logout</button>
     </li>
   </ul>
 </nav>

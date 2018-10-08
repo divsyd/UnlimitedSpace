@@ -52,6 +52,9 @@ export class SignupComponent implements OnInit, OnDestroy {
     return this.signupForm.get('password').dirty !== this.signupForm.get('passwordConfirmation').dirty;
   }
 
+  btnBack() {
+    this.router.navigate(['/']);
+  }
   ngOnDestroy() {
     this.authStatus.unsubscribe();
   }
