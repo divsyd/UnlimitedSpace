@@ -23,7 +23,8 @@ module.exports = class UserController {
                 message: 'User created!',
                 token: token,
                 expiresIn: 3600,
-                result: result
+                result: result,
+                userEmail: req.body.email
               }
             );
           })
@@ -59,7 +60,8 @@ module.exports = class UserController {
         res.status(200).json({
           message: 'success',
           expiresIn: 3600,
-          token: token
+          token: token,
+          userEmail: email
         })
       })
       .catch(err => {
