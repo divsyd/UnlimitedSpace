@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = class UserController {
   static registration(req, res) {
+    let userId = ''
     if (req.body.password !== req.body.passwordConfirmation) {
       return res.status(401).json({
         message: "the two password is not equal"
@@ -18,12 +19,14 @@ module.exports = class UserController {
         });
         user.save()
           .then(result => {
+            userId = result._id;
             const token = jwt.sign({email: req.body.email}, 'secret', {expiresIn: "1h"});
             res.status(201).json({
                 message: 'User created!',
                 token: token,
                 expiresIn: 3600,
                 result: result,
+                userId: userId,
                 userEmail: req.body.email
               }
             );
@@ -40,6 +43,7 @@ module.exports = class UserController {
   static loginUser(req, res) {
     const email = req.body.email  ;
     const password = req.body.password;
+    let userId = '';
 
     User.findOne({email: email})
       .then(user => {
@@ -48,6 +52,7 @@ module.exports = class UserController {
             message: "user doesn't exist"
           });
         }
+        userId = user._id;
         return bcrypt.compare(password, user.password);
       })
       .then(result => {
@@ -61,6 +66,7 @@ module.exports = class UserController {
           message: 'success',
           expiresIn: 3600,
           token: token,
+          userId: userId,
           userEmail: email
         })
       })

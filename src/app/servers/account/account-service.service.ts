@@ -14,6 +14,7 @@ import { Subject} from 'rxjs';
 export class AccountServiceService {
   private token: string;
   private userEmail: string;
+  private userId: string;
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
   private BASE_URL: String = 'http://localhost:8000/api/users/';
@@ -72,7 +73,8 @@ export class AccountServiceService {
       const expiration = new Date(now.getTime() + expiresDuration * 1000);
       console.log(expiration);
       this.userEmail = res.userEmail;
-      this.saveToken(token, expiration, this.userEmail);
+      this.userId = res.userId;
+      this.saveToken(token, expiration, this.userEmail, this.userId);
       this.router.navigate(['/user']);
     }
     }
@@ -85,16 +87,21 @@ export class AccountServiceService {
       this.router.navigate(['']);
     }
 
-    private saveToken(token: string, expirationDate: Date, userEmail: string) {
+    private saveToken(token: string,
+                      expirationDate: Date,
+                      userEmail: string,
+                      userId: string) {
       localStorage.setItem('token', token);
       localStorage.setItem('expiration', expirationDate.toISOString());
       localStorage.setItem('userEmail', userEmail);
+      localStorage.setItem('userId', userId);
     }
 
     private clearToken() {
       localStorage.removeItem('token');
       localStorage.removeItem('expiration');
       localStorage.removeItem('userEmail');
+      localStorage.removeItem('userId');
     }
 
     private getLoginData() {
