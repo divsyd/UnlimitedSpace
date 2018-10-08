@@ -1,11 +1,15 @@
 <div class="container">
-<div *ngIf="hotel">
-  <h3>{{hotel.name}}</h3>
-  <p class="font-weight-light">{{hotel.address}}, {{hotel.city}}, {{hotel.country}}</p>
-  <p>{{hotel.description}}</p>
-  <img src="{{hotel.img}}" alt="{{hotel.name}}">
+  <div class="row" *ngIf="hotel">
+    <div class="col-lg-12 p-2">
+      <section>
+        <h3>{{hotel.name}}</h3>
+        <p class="font-weight-light">{{hotel.address}}, {{hotel.city}}, {{hotel.country}}</p>
+        <p>{{hotel.description}}</p>
+        <img class="img-rounded img-responsive" src="{{hotel.img}}" alt="{{hotel.name}}">
+      </section>
+    </div>
+  </div>
   <div *ngIf="rooms$">
     <app-rooms [rooms$]="rooms$"></app-rooms>
   </div>
-</div>
 </div>

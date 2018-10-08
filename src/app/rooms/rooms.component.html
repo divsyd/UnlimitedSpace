@@ -3,10 +3,10 @@
     <a routerLink="/room/{{room._id}}">
       <div class="card d-flex flex-column">
         <div class="row">
-          <div class="col">
-            <img *ngIf="room.images" src="{{room.images[0]}}" alt="{{room.name}}">
+          <div class="col-lg-6">
+            <img class="hotel-image img-rounded img-responsive" *ngIf="room.images" src="{{room.images[0]}}" alt="{{room.name}}">
           </div>
-          <div class="col">
+          <div class="col-lg-6">
             <h4>
               {{room.name}}
             </h4>
@@ -29,7 +29,9 @@
       </div>
     </a>
   </div>
-
-  <button type="button" class="btn" (click)="goBack()">Back</button>
-
+</div>
+<div class="row">
+  <div class="col-lg-12 p-2">
+    <button type="button" class="btn" (click)="goBack()">Back</button>
+  </div>
 </div>
