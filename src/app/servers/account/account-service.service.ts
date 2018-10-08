@@ -18,7 +18,7 @@ export class AccountServiceService {
   private userId: string;
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
-  private BASE_URL = environment.apiUrl + '/users';  // URL to web api
+  private BASE_URL = environment.apiUrl + '/users/';  // URL to web api
   constructor(private http: HttpClient,
     private router: Router) { }
 
