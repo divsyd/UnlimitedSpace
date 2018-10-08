@@ -13,6 +13,8 @@ import { Subject} from 'rxjs';
 
 export class AccountServiceService {
   private token: string;
+  private userEmail: string;
+  private userId: string;
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
   private BASE_URL: String = 'http://localhost:8000/api/users/';
@@ -44,18 +46,20 @@ export class AccountServiceService {
     }
   }
   login(user: User) {
-    return this.http.post<{token: string}>(this.BASE_URL + 'login', user)
+    this.http.post<{token: string}>(this.BASE_URL + 'login', user)
       .subscribe(response => {
         this.duplicated(response);
-      });
+      }, error => {
+        this.authStatusListener.next(false);});
   }
   // Signup function
   signup(user: User) {
-    return this.http.post<{token: string}>(this.BASE_URL + 'signup', user)
+    this.http.post<{token: string}>(this.BASE_URL + 'signup', user)
       .subscribe(response => {
         this.duplicated(response);
-        }
-      );
+        }, error => {
+          this.authStatusListener.next(false);
+        });
   }
 
   duplicated(res) {
@@ -68,7 +72,9 @@ export class AccountServiceService {
       const now = new Date();
       const expiration = new Date(now.getTime() + expiresDuration * 1000);
       console.log(expiration);
-      this.saveToken(token, expiration);
+      this.userEmail = res.userEmail;
+      this.userId = res.userId;
+      this.saveToken(token, expiration, this.userEmail, this.userId);
       this.router.navigate(['/user']);
     }
     }
@@ -81,14 +87,21 @@ export class AccountServiceService {
       this.router.navigate(['']);
     }
 
-    private saveToken(token: string, expirationDate: Date) {
+    private saveToken(token: string,
+                      expirationDate: Date,
+                      userEmail: string,
+                      userId: string) {
       localStorage.setItem('token', token);
       localStorage.setItem('expiration', expirationDate.toISOString());
+      localStorage.setItem('userEmail', userEmail);
+      localStorage.setItem('userId', userId);
     }
 
     private clearToken() {
       localStorage.removeItem('token');
       localStorage.removeItem('expiration');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userId');
     }
 
     private getLoginData() {
