@@ -124,14 +124,13 @@ if (Test-Path "$DEPLOYMENT_TARGET\package.json") {
     popd
 }
 
-# 4. Install Angular
+# 4. Angular Prod Build
 if (Test-Path "$DEPLOYMENT_TARGET\angular.json") {
     pushd "$DEPLOYMENT_TARGET"
     try {
-        iex "$NPM_CMD install @angular/cli"
         iex ".\node_modules\.bin\ng build --progress false --prod"
     } catch {
-        exitWithMessageOnError "npm failed"
+        exitWithMessageOnError "ng build failed"
     }
     popd
 }
