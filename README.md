@@ -82,7 +82,7 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 - For local development, we run the frontend and backend as different processes but for the cloud, we run them under a single process or app.
 - We have a CD pipeline that builds the angular frontend and deploys the app.
 - Our frontend (Angular) is set to connect to [localhost](https://github.com/divsyd/UnlimitedSpace/blob/master/src/environments/environment.ts) by default or relative path [./api](https://github.com/divsyd/UnlimitedSpace/blob/master/src/environments/environment.prod.ts) when run with the prod argument.
-- Our backend (ExpressJS) connects to our cloud DB server using environment variable [CUSTOMCONNSTR_mongo](https://github.com/divsyd/UnlimitedSpace/blob/master/config/DbServer.js) when found, otherwise it defaults to MongoDb localhost. 
+- Our backend (ExpressJS) connects to our cloud DB server using environment variable [production](https://github.com/divsyd/UnlimitedSpace/blob/master/config/production.js) when found, otherwise it defaults to MongoDb [localhost](https://github.com/divsyd/UnlimitedSpace/blob/master/config/development.json). 
 - With this setup, we can do rapid development locally using Angular's dynamic build and reload with `ng serve`, continuously intergrade (push) back to Github and continuously deploy to the cloud and not have to worry about changing server settings.
 
 ### Cloud server links
