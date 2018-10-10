@@ -38,11 +38,11 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 		
 1. Install MongoDB. See guide [here](https://docs.mongodb.com/manual/installation). 
 
-    - An alternate option is to run Mongo in a docker conntainer
+    - An alternate option is to run Mongo in a Docker container
 
 			docker run --name mongodb -p 27017:27017 --rm mongo:4.0.1
 
-1. Start mondodb
+1. Start MondoDB
 
 		mkdir -p ./db/data
 		mongod --dbpath ./db/data --logpath ./db/log
@@ -57,30 +57,35 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 
 			node ./populateDb mongodb+srv://dbuser:PASSWORD@cluster0-d1fpj.mongodb.net/unlimitedSpaceDb?retryWrites=true
 		
-1. Build Angular frontend
+1. For local development, start the backend API
 
-		 ng build
-		
-1. Start backend api
+		npm start
 
-    npm start
+1. And start the frontend
 
-1. Start the front end
-
-	ng serve
+		ng serve
 
 1. Connect to frontend: [http://localhost:4200/](http://localhost:4200/)
     
-Testing User account
-  1.  test3@account.com 
-      
-      password: testtest
-      
-  2.  test4@account.com 
-      
-      password: testtest
-         
+### Test user account
 
+1.	- username: test3@account.com 
+      
+	- password: testtest
+      
+2. 	- username: test4@account.com 
+      
+	- password: testtest
+         
+## Cloud server
+
+- For local development, we run the frontend and backend as different processes but for the cloud, we run them under a single process or app.
+- We have a CD pipeline that builds the angular frontend and deploys the app.
+- Our frontend (Angular) is set to connect to [localhost](https://github.com/divsyd/UnlimitedSpace/blob/master/src/environments/environment.ts) by default or relative path [./api](https://github.com/divsyd/UnlimitedSpace/blob/master/src/environments/environment.prod.ts) when run with the prod argument.
+- Our backend (ExpressJS) connects to our cloud DB server using environment variable [CUSTOMCONNSTR_mongo](https://github.com/divsyd/UnlimitedSpace/blob/master/config/DbServer.js) when found, otherwise it defaults to MongoDb localhost. 
+- With this setup, we can do rapid development locally using Angular's dynamic build and reload with `ng serve`, continuously intergrade (push) back to Github and continuously deploy to the cloud and not have to worry about changing server settings.
+
+### Cloud server links
 
 - main site: [https://unlimitedspace.azurewebsites.net/](https://unlimitedspace.azurewebsites.net/)
 - api get all rooms: [https://unlimitedspace.azurewebsites.net/api/rooms](https://unlimitedspace.azurewebsites.net/api/rooms)
