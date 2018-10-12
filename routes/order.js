@@ -30,7 +30,7 @@ router.get('/:userId', checkAuth, (req, res) => {
 });
 
 // create order
-router.post('/',(req, res) => {
+router.post('/', checkAuth, (req, res) => {
   const order = new Order(req.body);
   order.save()
     .then(order => {
@@ -42,7 +42,7 @@ router.post('/',(req, res) => {
 });
 
 // update order
-router.put('/',(req, res) => {
+router.put('/', checkAuth, (req, res) => {
   const order = new Order({
     _id: req.body.id,
     roomInstance: req.body.roomInstance,
@@ -59,7 +59,7 @@ router.put('/',(req, res) => {
 });
 
 // delete order by id
-router.delete('/:id', (req, res) => {
+router.delete('/:id', checkAuth, (req, res) => {
   Order.deleteOne({'_id': req.params.id})
     .then(order => {
       res.status(204).json(order);
