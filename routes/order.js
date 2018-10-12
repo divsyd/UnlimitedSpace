@@ -3,10 +3,12 @@ const router = express.Router();
 var Order = require('../models/order');
 const checkAuth = require('../middleware/check-auth');
 
-// order api
+/** order api
+ * order's CRUD operations
+ */
 
-// get all
-router.get('/',(req, res) => {
+// get all orders
+router.get('/', checkAuth, (req, res) => {
   Order.find()
     .then(orders => {
       res.status(200).json(orders);
@@ -16,9 +18,9 @@ router.get('/',(req, res) => {
     });
 });
 
-// GET request by user id
-router.get('/:userId', (req, res) => {
-  Order.findById({ 'user': req.params.userId })
+// GET orders by user id
+router.get('/:userId', checkAuth, (req, res) => {
+  Order.find({ 'user': req.params.userId })
     .then(orders => {
       res.status(200).json(orders);
     })
@@ -29,13 +31,7 @@ router.get('/:userId', (req, res) => {
 
 // create order
 router.post('/',(req, res) => {
-  const order = new Order({
-    roomInstance: req.body.roomInstance,
-    user: req.body.user,
-    fromDate: req.body.fromDate,
-    toDate: req.body.toDate,
-    numNights: req.body.numNights
-  });
+  const order = new Order(req.body);
   order.save()
     .then(order => {
       res.status(201).json(order);
@@ -62,8 +58,8 @@ router.put('/',(req, res) => {
     })
 });
 
-// delete request by order id
-router.delete('/delete/:id', (req, res) => {
+// delete order by id
+router.delete('/:id', (req, res) => {
   Order.deleteOne({'_id': req.params.id})
     .then(order => {
       res.status(204).json(order);

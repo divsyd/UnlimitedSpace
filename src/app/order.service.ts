@@ -21,27 +21,30 @@ export class OrderService {
     );
   }
 
+  // Create order
   createOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(this.orderUrl, order).pipe(
       catchError(this.handleError<Order>(`createOrder`))
     );
   }
 
+  // Delete order by id
   deleteOrder(orderId: String): Observable<Order> {
-    const url = `${this.orderUrl}/delete/${orderId}`;
+    const url = `${this.orderUrl}/${orderId}`;
     return this.http.delete<Order>(url).pipe(
       catchError(this.handleError<Order>(`deleteOrder id=${orderId}`))
     );
   }
 
-  //  Get orders by user id
-  getOrders(usrId: string): Observable<Order[]> {
+  // Get orders by user id
+  getOrdersByUser(usrId: string): Observable<Order[]> {
     const url = `${this.orderUrl}/${usrId}`;
     return this.http.get<Order[]>(url).pipe(
       catchError(this.handleError<Order[]>(`getOrders id=${usrId}`))
     );
   }
 
+  // Error Handling
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead
