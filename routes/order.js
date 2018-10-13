@@ -42,15 +42,12 @@ router.post('/', checkAuth, (req, res) => {
 });
 
 // update order
-router.put('/', checkAuth, (req, res) => {
-  const order = new Order({
-    _id: req.body.id,
-    roomInstance: req.body.roomInstance,
-    user: req.body.user,
-    numNights: req.body.numNights
-  });
-  order.update()
-    .then(order => {
+router.put('/:id', checkAuth, (req, res) => {
+  Order.findByIdAndUpdate(req.params.id, {
+    $set: { numNights: req.body.numNights }
+  },{
+    new: true
+  }).then(order => {
       res.status(200).json(order);
     })
     .catch(error => {

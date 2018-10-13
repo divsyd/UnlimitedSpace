@@ -25,11 +25,12 @@ export class OrdersComponent implements OnInit {
    this.getOrdersByUser();
   }
 
-// back to the main page
+  // back to the main page
   goBack(): void {
     this.router.navigateByUrl(``);
   }
 
+  // Get orders by user id
   getOrdersByUser() {
     const userId = localStorage.getItem('userId');
     this.orders$ = this.orderService.getOrdersByUser(userId);
@@ -40,5 +41,16 @@ export class OrdersComponent implements OnInit {
     this.orderService.deleteOrder(order._id).subscribe(successCode => {
       this.getOrdersByUser();
     });
+  }
+
+  // edit order
+  editOrder(order: Order) {
+    order.canEdit = true;
+  }
+
+  // update order
+  updateOrder(order: Order) {
+    order.canEdit = false;
+    this.orderService.updateOrder(order).subscribe();
   }
 }

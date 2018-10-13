@@ -18,8 +18,26 @@
           <th>{{order.reservationDate | date: "dd/MM/yyyy"}}</th>
           <th>{{order.fromDate | date: "dd/MM/yyyy"}}</th>
           <th>{{order.toDate | date: "dd/MM/yyyy"}}</th>
-          <th>{{order.numNights}}</th>
-          <th><button type="button" class="btn btn-danger" (click)="cancelOrder(order);">Cancel Order</button></th>
+          <th *ngIf="!order.canEdit">{{order.numNights}}</th>
+          <th *ngIf="order.canEdit">
+            <input type="text"
+                   class="form-control"
+                   #numNights="ngModel"
+                   required pattern="^\d+$"
+                   [class.is-invalid]="numNights.invalid && numNights.touched"
+                   name="numNights"
+                   [(ngModel)]="order.numNights">
+            <div *ngIf="numNights.errors && (numNights.invalid || numNights.touched)">
+              <small class="text-danger" *ngIf="numNights.errors.required">numNights is required</small>
+              <small class="text-danger" *ngIf="numNights.errors.pattern">numNights must be number</small>
+            </div>
+          </th>
+          <th>
+            <button *ngIf="!order.canEdit" type="button" class="btn btn-primary" (click)="editOrder(order)">Edit</button>
+            <button *ngIf="order.canEdit" type="button" class="btn btn-primary" (click)="updateOrder(order)">Update</button>
+            {{order | json}}
+            <button type="button" class="btn btn-danger ml-2" (click)="cancelOrder(order);">Cancel</button>
+          </th>
         </tr>
       </tbody>
     </table>
