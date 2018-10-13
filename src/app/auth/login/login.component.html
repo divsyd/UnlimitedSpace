@@ -21,6 +21,7 @@
       <button mat-raised-button
               color="primary"
               type="submit"
+              [disabled]="this.loginForm.invalid"
       >Log in</button>
   </form>
 </mat-card>
