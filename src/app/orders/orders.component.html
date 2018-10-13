@@ -35,7 +35,7 @@
           <th>
             <button *ngIf="!order.canEdit" type="button" class="btn btn-primary" (click)="editOrder(order)">Edit</button>
             <button *ngIf="order.canEdit" type="button" class="btn btn-primary" (click)="updateOrder(order)">Update</button>
-            {{order | json}}
+            <!--{{order | json}}-->
             <button type="button" class="btn btn-danger ml-2" (click)="cancelOrder(order);">Cancel</button>
           </th>
         </tr>
