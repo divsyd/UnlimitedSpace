@@ -6,7 +6,7 @@ const checkAuth = require('../middleware/check-auth');
 // order api
 
 // get all
-router.get('/',(req, res) => {
+router.get('/',checkAuth,(req, res) => {
   Order.find()
     .then(orders => {
       res.status(200).json(orders);
