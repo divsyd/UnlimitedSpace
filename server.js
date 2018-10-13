@@ -13,8 +13,6 @@ const morgan = require('morgan');
 // Get our API routes
 const api = require('./routes/api');
 const userApi = require('./routes/user');
-const hotelApi = require('./routes/hotel');
-const roomApi = require('./routes/room');
 const roomInstanceApi = require('./routes/roomInstance');
 const orderApi = require('./routes/order');
 
@@ -44,8 +42,6 @@ app.use((req, res, next) => {
 });
 // Set our api routes
 app.use('/api', api);
-app.use('/api/hotel', hotelApi);
-app.use('/api/room', roomApi);
 app.use('/api/roominstance', roomInstanceApi);
 app.use('/api/order', orderApi);
 
