@@ -29,3 +29,14 @@ const routes: Routes = [
   providers: [AuthGuard]
 })
 export class AppRoutingModule { }
+
+export const routingComponent = [
+  HotelsComponent,
+  HotelDetailComponent,
+  RoomDetailComponent,
+  OrdersComponent,
+  UserComponent,
+  LoginComponent,
+  SignupComponent,
+  PageNotFoundComponent
+];

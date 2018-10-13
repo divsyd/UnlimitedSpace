@@ -22,7 +22,7 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.getAllOrders();
+   this.getOrdersByUser();
   }
 
 // back to the main page
@@ -30,14 +30,15 @@ export class OrdersComponent implements OnInit {
     this.router.navigateByUrl(``);
   }
 
-  getAllOrders() {
-    this.orders$ = this.orderService.getAllOrders();
+  getOrdersByUser() {
+    const userId = localStorage.getItem('userId');
+    this.orders$ = this.orderService.getOrdersByUser(userId);
   }
 
   // cancel order
   cancelOrder(order: Order) {
     this.orderService.deleteOrder(order._id).subscribe(successCode => {
-      this.getAllOrders();
+      this.getOrdersByUser();
     });
   }
 }

@@ -110,11 +110,16 @@ if ($env:IN_PLACE_DEPLOYMENT -ne "1") {
 # 2. Select node version
 selectNodeVersion
 
-# 3. Install npm packages
+# 3. Sleeping to stop quota limit issues
+if ($env:delaydeploy) {
+    Start-Sleep -Seconds 300
+}
+
+# 4. Install npm packages
 if (Test-Path "$DEPLOYMENT_TARGET\package.json") {
     pushd "$DEPLOYMENT_TARGET"
     try {
-        $env:path = $env:path.replace("D:\Program Files (x86)\MSBuild\14.0\Bin","D:\Program Files (x86)\MSBuild-15.3.409.57025\MSBuild\15.0\Bin")
+        $env:path = $env:path.replace("D:\Program Files (x86)\MSBuild\14.0\Bin", "D:\Program Files (x86)\MSBuild-15.3.409.57025\MSBuild\15.0\Bin")
         iex "$NPM_CMD config set msvs_version 2017"
 
         iex "$NPM_CMD install --production"
@@ -124,14 +129,19 @@ if (Test-Path "$DEPLOYMENT_TARGET\package.json") {
     popd
 }
 
-# 4. Install Angular
+# 5. Sleeping to stop quota limit issues
+if ($env:delaydeploy) {
+    Start-Sleep -Seconds 300
+}
+
+
+# 6. Angular Prod Build
 if (Test-Path "$DEPLOYMENT_TARGET\angular.json") {
     pushd "$DEPLOYMENT_TARGET"
     try {
-        iex "$NPM_CMD install @angular/cli"
         iex ".\node_modules\.bin\ng build --progress false --prod"
     } catch {
-        exitWithMessageOnError "npm failed"
+        exitWithMessageOnError "ng build failed"
     }
     popd
 }

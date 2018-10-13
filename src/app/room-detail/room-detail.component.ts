@@ -6,6 +6,7 @@ import {RoomService} from '../room.service';
 import {HotelService} from '../hotel.service';
 import {OrderService} from '../order.service';
 import {Order} from '../order';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -20,14 +21,21 @@ export class RoomDetailComponent implements OnInit {
     private roomService: RoomService,
     private hotelService: HotelService,
     private orderService: OrderService,
-    private location: Location
+    private location: Location,
+    private formBuilder: FormBuilder
   ) {
   }
 
   daterangepickerModel: Date[];
   roomDetail: RoomDetail;
+  reserveForm: FormGroup;
 
   ngOnInit(): void {
+    this.reserveForm = this.formBuilder.group({
+      dataRange: ['', Validators.required],
+      numOfNight: ['', [Validators.required, Validators.pattern(/\d+/)]]
+    });
+
     const roomId = this.route.snapshot.paramMap.get('id');
     this.roomService.getRoom(roomId).subscribe(room => {
       this.hotelService.getHotel(room.hotel).subscribe(hotel => {
@@ -35,29 +43,31 @@ export class RoomDetailComponent implements OnInit {
         this.roomDetail.hotel = hotel;
       });
     });
+  }
 
+  get numOfNight() {
+    return this.reserveForm.get('numOfNight');
+  }
+
+  get dataRange() {
+    return this.reserveForm.get('dataRange');
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  reserve(roomInstance: String) {
+  onSubmit() {
     if (localStorage.getItem('token') == null) {
-      alert('login');
+      alert('Please login');
       return;
     }
-    /*{
-      roomInstance: '5bb9b361369525697c31397c',
-      user: '5bb9b35e369525697c31397a',
-      numNights: 5
-    }*/
     const order = new Order();
-    order.roomInstance = roomInstance;
+    order.roomInstance = this.roomDetail._id;
     order.user = localStorage.getItem('userId');
     order.fromDate = this.daterangepickerModel[0];
     order.toDate = this.daterangepickerModel[1];
-    order.numNights = 5;
+    order.numNights = this.numOfNight.value;
 
     this.orderService.createOrder(order).subscribe(successCode => {
       alert('create order successfully');

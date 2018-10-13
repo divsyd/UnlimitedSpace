@@ -1,34 +1,30 @@
-<div class="container">
+<div class="container-fluid">
 
-  <div class="row d-flex justify-content-center">
-
-    <div class="row">
-      <ul>
-        <li *ngFor="let order of orders$ | async">
-          <h3>
-            Order No: {{order._id}}
-          </h3>
-          <dl>
-            <dt>
-              Reservation Date: {{order.reservationDate}}
-            </dt>
-            <dt>
-              From Date: {{order.fromDate}}
-            </dt>
-            <dt>
-              To Date: {{order.toDate}}
-            </dt>
-            <dt>
-              Number of Nights: {{order.numNights}}
-            </dt>
-          </dl>
-          <button type="button" class="btn btn-danger space_button" (click)="cancelOrder(order);">Cancel Order</button>
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <button type="button" class="btn btn-danger space_button" (click)="goBack();">Back</button>
-    </div>
+  <div class="row d-flex">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Order No</th>
+          <th scope="col">Reservation Date</th>
+          <th scope="col">From Date</th>
+          <th scope="col">To Date</th>
+          <th scope="col">Number of Night</th>
+          <th scope="col">Operation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders$ | async">
+          <th scope="row">{{order._id}}</th>
+          <th>{{order.reservationDate | date: "dd/MM/yyyy"}}</th>
+          <th>{{order.fromDate | date: "dd/MM/yyyy"}}</th>
+          <th>{{order.toDate | date: "dd/MM/yyyy"}}</th>
+          <th>{{order.numNights}}</th>
+          <th><button type="button" class="btn btn-danger" (click)="cancelOrder(order);">Cancel Order</button></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <button type="button" class="btn btn-secondary" (click)="goBack();">Back</button>
   </div>
 </div>

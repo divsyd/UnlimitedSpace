@@ -1,5 +1,8 @@
 // Configuration for DB
-const mongoDB = process.env.CUSTOMCONNSTR_mongo || 'mongodb://localhost:27017/unlimitedSpaceDb';
+const config = require('config')
+// Connects to 'mongodb://localhost:27017/unlimitedSpaceDb' by default or cloud db when NODE_ENV:production connection string is set on host
+const mongoDB = config.dbConfig.host
+
 const mongoose = require('mongoose');
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
