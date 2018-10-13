@@ -44,6 +44,14 @@ export class OrderService {
     );
   }
 
+  // update order
+  updateOrder(order: Order) {
+    const url = `${this.orderUrl}/${order._id}`;
+    return this.http.put<Order>(url, order).pipe(
+      catchError(this.handleError<Order[]>(`updateOrder id=${order.user}`))
+    );
+  }
+
   // Error Handling
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

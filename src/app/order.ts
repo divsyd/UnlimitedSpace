@@ -7,4 +7,5 @@ export class Order {
   toDate: Date;
   reservationDate: Date;
   numNights: number;
+  canEdit = false;
 }
