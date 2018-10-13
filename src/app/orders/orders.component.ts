@@ -13,6 +13,7 @@ import {Observable} from 'rxjs';
 export class OrdersComponent implements OnInit {
 
   orders$: Observable<Order[]>;
+  errorMsg = '';
 
   constructor(
     private orderService: OrderService,
@@ -38,9 +39,10 @@ export class OrdersComponent implements OnInit {
 
   // cancel order
   cancelOrder(order: Order) {
-    this.orderService.deleteOrder(order._id).subscribe(successCode => {
-      this.getOrdersByUser();
-    });
+    this.orderService.deleteOrder(order._id).subscribe(
+      successCode => this.getOrdersByUser(),
+      error => this.errorMsg = error.statusText
+    );
   }
 
   // edit order
@@ -51,6 +53,9 @@ export class OrdersComponent implements OnInit {
   // update order
   updateOrder(order: Order) {
     order.canEdit = false;
-    this.orderService.updateOrder(order).subscribe();
+    this.orderService.updateOrder(order).subscribe(
+      successCode => this.getOrdersByUser(),
+      error => this.errorMsg = error.statusText
+    );
   }
 }

@@ -1,8 +1,13 @@
 <div class="container-fluid">
 
+  <div class="alert alert-danger" *ngIf="errorMsg">
+    {{errorMsg}}
+  </div>
+
   <div class="row d-flex">
-    <table class="table table-bordered">
-      <thead class="thead-light">
+    <form #orderForm="ngForm">
+      <table class="table table-bordered">
+        <thead class="thead-light">
         <tr>
           <th scope="col">Order No</th>
           <th scope="col">Reservation Date</th>
@@ -11,8 +16,8 @@
           <th scope="col">Number of Night</th>
           <th scope="col">Operation</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr *ngFor="let order of orders$ | async">
           <th scope="row">{{order._id}}</th>
           <th>{{order.reservationDate | date: "dd/MM/yyyy"}}</th>
@@ -33,14 +38,18 @@
             </div>
           </th>
           <th>
-            <button *ngIf="!order.canEdit" type="button" class="btn btn-primary" (click)="editOrder(order)">Edit</button>
-            <button *ngIf="order.canEdit" type="button" class="btn btn-primary" (click)="updateOrder(order)">Update</button>
+            <button *ngIf="!order.canEdit" type="button" class="btn btn-primary" (click)="editOrder(order)">Edit
+            </button>
+            <button *ngIf="order.canEdit" type="button" class="btn btn-primary" [disabled]="orderForm.form.invalid"
+                    (click)="updateOrder(order)">Update
+            </button>
             <!--{{order | json}}-->
             <button type="button" class="btn btn-danger ml-2" (click)="cancelOrder(order);">Cancel</button>
           </th>
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </form>
   </div>
   <div class="row">
     <button type="button" class="btn btn-secondary" (click)="goBack();">Back</button>
