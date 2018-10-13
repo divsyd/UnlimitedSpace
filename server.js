@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const uuidv1 = require('uuid/v1');
 const app = express();
 const cors = require('cors');
+const morgan = require('morgan');
+
 
 // Get our API routes
 const api = require('./routes/api');
@@ -15,6 +17,13 @@ const hotelApi = require('./routes/hotel');
 const roomApi = require('./routes/room');
 const roomInstanceApi = require('./routes/roomInstance');
 const orderApi = require('./routes/order');
+
+// Used for logging (Standard Apache combined log output). Example format:
+// :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
+if (process.env.NODE_ENV != "production") {
+  app.use(morgan('combined'));
+}
+
 // for parsing application/x-www-form-urlencoded
 // for parsing application/json
 app.use(bodyParser.json());
@@ -43,10 +52,12 @@ app.use('/api/order', orderApi);
 app.use(cors());
 app.use(express.static('./dist/UnlimitedSpace'));
 
-app.get('/*', function (req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/UnlimitedSpace/index.html'));
 });
 
 const port = process.env.PORT || 8000;
 console.log(`Running on http://localhost:${port}/`);
 app.listen(port);
+
+module.exports = app; // used for testing
