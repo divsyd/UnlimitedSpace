@@ -7,6 +7,8 @@ export class RoomDetail {
     hotel: Hotel;
     maxGuest: number;
     bedrooms: number;
+    price: number;
+    images: [string]
 
     constructor(item: any) {
         Object.assign(this, item);
