@@ -35,19 +35,16 @@ export class RoomService {
     return this.http.get<Room>(url)
       .pipe(
         catchError(this.handleError<Room>(`getRoom id=${id}`)),
-        tap(x => console.log('getRoom', x))
+        // tap(x => console.log('getRoom', x))
       );
   }
 
   //  Get rooms by hotel id
   getRoomByHotel(id: string): Observable<Room[]> {
-    return this.http.get<Room[]>(this.roomUrl)
+    const url = this.roomUrl + "?hotel=" + id;
+    return this.http.get<Room[]>(url)
       .pipe(
         catchError(this.handleError('getRooms', [])),
-        map(rooms => rooms.filter(room => room.hotel === id)),
-        map(rooms => rooms.sort(
-          (a, b) => a.price - b.price
-        )),
         // tap(x => console.log('getRoomByHotel', x))
       );
   }
