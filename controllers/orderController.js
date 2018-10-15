@@ -17,9 +17,15 @@ function getAllOrders(req, res) {
 
 // GET orders by user id
 function getOrdersByUserId(req, res) {
-  Order.find({'user': req.params.userId})
+  Order.find({'user': req.params.userId}).populate('room')
     .then(orders => {
-      res.status(200).json(orders);
+      // const ids = orders.map(order => order.room);
+      // Room.find({'_id': {$in: ids}})
+      //   .then(rooms => {
+          console.log(orders);
+          console.log()
+          res.status(200).json(orders);
+        // })
     })
     .catch(error => {
       res.status(500).send(error);
