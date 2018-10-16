@@ -19,10 +19,7 @@ export class HotelComponent implements OnInit {
   constructor(private roomService: RoomService) { }
 
   ngOnInit() {
-    this.rooms$ = this.roomService.getRoomByHotel(this.hotel._id).pipe(
-      // Select only first room which is cheapest
-      map(rooms => [rooms[0]]),
-    )
+    this.rooms$ = this.roomService.getRooms(true, this.hotel._id, 1)
   }
 
 

@@ -23,15 +23,13 @@ export class HotelDetailComponent implements OnInit {
   ) { }
 
   hotel: Hotel;
-  rooms: Room[];
   rooms$: Observable<Room[]>;
 
   ngOnInit(): void {
     const hotelId = this.route.snapshot.paramMap.get('id');
     this.hotelService.getHotel(hotelId).subscribe(hotel => {
       this.hotel = hotel;
-      this.rooms$ = this.roomService.getRoomByHotel(hotel._id);
-      // this.roomService.getRoomByHotel(hotel._id).subscribe(rooms => this.rooms = rooms);
+      this.rooms$ = this.roomService.getRooms(true, hotel._id);
     });
 
   }

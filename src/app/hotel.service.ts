@@ -5,10 +5,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Hotel } from './hotel';
 import { environment } from './../environments/environment';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
 @Injectable({
   providedIn: 'root'
 })

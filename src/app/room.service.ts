@@ -5,10 +5,6 @@ import { catchError, map, tap, filter } from 'rxjs/operators';
 import { Room } from './room';
 import { environment } from './../environments/environment';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
 @Injectable({
   providedIn: 'root',
 })
@@ -21,14 +17,30 @@ export class RoomService {
   ) { }
 
 
-  getRooms(): Observable<Room[]> {
-    return this.http.get<Room[]>(this.roomUrl)
+  // Get rooms getter but also allows options to filter by hotel, number of items returned and sort by hotel id and then room price
+  getRooms(sort?: boolean, hotelId?: string, limitResults?: number): Observable<Room[]> {
+
+    let options = ""
+    if (sort) {
+      options = options + "&sort=" + sort;
+    }
+    if (hotelId) {
+      options = options + "&hotel=" + hotelId;
+    }
+    if (limitResults) {
+      options = options + "&limit=" + limitResults;
+    }
+ 
+    let url = this.roomUrl + "?" + options;
+
+    return this.http.get<Room[]>(url)
       .pipe(
         catchError(this.handleError('getRooms', [])),
         // tap(x => console.log('getRooms', x))
       );
   }
 
+  
   //  Get room by id
   getRoom(id: string): Observable<Room> {
     const url = `${this.roomUrl}/${id}`;
@@ -36,16 +48,6 @@ export class RoomService {
       .pipe(
         catchError(this.handleError<Room>(`getRoom id=${id}`)),
         // tap(x => console.log('getRoom', x))
-      );
-  }
-
-  //  Get rooms by hotel id
-  getRoomByHotel(id: string): Observable<Room[]> {
-    const url = this.roomUrl + "?hotel=" + id;
-    return this.http.get<Room[]>(url)
-      .pipe(
-        catchError(this.handleError('getRooms', [])),
-        // tap(x => console.log('getRoomByHotel', x))
       );
   }
 
