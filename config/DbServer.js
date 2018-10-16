@@ -10,7 +10,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Add more listener for mongoose
-db.on('connected', () => { console.log('Mongoose connected'); });
+db.on('connected', () => { console.log('\nMongoose connected to database ' + mongoDB + '\n'); });
 db.on('disconnected',
   () => { console.log('\nMongoose disconnected'); });
 db.on('error',
