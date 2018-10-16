@@ -18,7 +18,7 @@ const orderApi = require('./routes/order');
 
 // Used for logging (Standard Apache combined log output). Example format:
 // :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
-if (process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV != "production" && process.env.NODE_ENV != "test") {
   app.use(morgan('combined'));
 }
 
