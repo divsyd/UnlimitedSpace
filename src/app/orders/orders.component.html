@@ -13,6 +13,7 @@
           <th scope="col">Reservation Date</th>
           <th scope="col">From Date</th>
           <th scope="col">To Date</th>
+          <th scope="col">Room Name</th>
           <th scope="col">Number of Night</th>
           <th scope="col">Operation</th>
         </tr>
@@ -23,6 +24,7 @@
           <th>{{order.reservationDate | date: "dd/MM/yyyy"}}</th>
           <th>{{order.fromDate | date: "dd/MM/yyyy"}}</th>
           <th>{{order.toDate | date: "dd/MM/yyyy"}}</th>
+          <th>{{order.room.name}}</th>
           <th *ngIf="!order.canEdit">{{order.numNights}}</th>
           <th *ngIf="order.canEdit">
             <input type="text"
