@@ -15,10 +15,8 @@ function getRoom(req, res) {
         });
 };
 
-// Get all rooms and sorts by price. Also accepts optonal parameter to get rooms for specific 
-// hotel e.g.http://localhost:8000/api/room?hotel=5bc2d402ae96b33360e0a8dc
-
-
+// Get all rooms and sorts by price. Also accepts optonal parameters e.g. to get rooms a for specific 
+// hotel would be http://localhost:8000/api/room?hotel=5bc2d402ae96b33360e0a8dc
 function getRooms(req, res) {
     let query = [];
 
