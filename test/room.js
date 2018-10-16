@@ -21,7 +21,7 @@ describe('Rooms', () => {
     });
 
     // Test the /GET route
-    describe('/GET room', () => {
+    describe('GET room', () => {
         it('it should GET all the Rooms', (done) => {
             chai.request(server)
                 .get('/api/room')
@@ -36,7 +36,7 @@ describe('Rooms', () => {
 
 
     // Test the /GET/:id route
-    describe('/GET/:id room', () => {
+    describe('GET room/:id', () => {
         it('it should GET a room by the given id', (done) => {
             let hotel = new Hotel({
                 name: "Hilton Hotel", address: '123 Sydney Road', city: 'Sydney', country: 'Australia', description: "Luxury hotel located in the heart of the city", img: 'assets/images/hilton-01.jpg'
@@ -71,8 +71,8 @@ describe('Rooms', () => {
 
 
     // Test the /GET/:id/?room=id route
-    describe('/GET?hotel=id room', () => {
-        it('it should GET rooms based on hotel id', (done) => {
+    describe('GET room?hotel=id', () => {
+        it('it should GET all rooms for specific hotel', (done) => {
 
             const hotels = [
                 Hotel({
