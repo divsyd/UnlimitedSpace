@@ -173,9 +173,9 @@ function roomInstanceCreate(room, status, cb) {
   });
 }
 
-function orderCreate(roomInstance, user, numNights, cb) {
+function orderCreate(room, user, numNights, cb) {
   orderDetail = {
-    roomInstance: roomInstance,
+    room: room,
     user: user,
     numNights: numNights,
     fromDate: Date.now(),
@@ -258,10 +258,10 @@ function createRoomInstances(cb) {
 function createOrders(cb) {
   async.parallel([
     function (callback) {
-      orderCreate(roomInstances[0], users[0], 1, callback);
+      orderCreate(rooms[0], users[0], 1, callback);
     },
     function (callback) {
-      orderCreate(roomInstances[1], users[1], 2, callback);
+      orderCreate(rooms[1], users[1], 2, callback);
     },
   ],
     // optional callback
