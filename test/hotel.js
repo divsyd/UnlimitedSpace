@@ -44,7 +44,6 @@ describe('Hotels', () => {
             hotel.save((err, hotel) => {
                 chai.request(server)
                     .get('/api/hotel/' + hotel.id)
-                    .send(hotel)
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.be.a('object');
@@ -56,9 +55,6 @@ describe('Hotels', () => {
                         done();
                     });
             });
-
         });
     });
-
-
 });
