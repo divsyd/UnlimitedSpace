@@ -33,7 +33,6 @@ export class SignupComponent implements OnInit, OnDestroy {
                       .getAuthStatusListener()
                       .subscribe( auth => {},
                         error => {
-
                         });
   }
   signUp() {

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 var RoomInstance = require('../models/roominstance');
 
-
 // RoomInstance 
 
 // GET request by id

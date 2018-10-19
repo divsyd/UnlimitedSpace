@@ -43,7 +43,7 @@ export class AccountServiceService {
         this.token = authInformation.token;
         this.isAuthenticated = true;
         this.authStatusListener.next(true);
-      }
+      } // TODO remove get login after 1h
     }
   }
   login(user: User) {
@@ -73,11 +73,11 @@ export class AccountServiceService {
       this.authStatusListener.next(true);
       const now = new Date();
       const expiration = new Date(now.getTime() + expiresDuration * 1000);
-      console.log(expiration);
       this.userEmail = res.userEmail;
       this.userId = res.userId;
       this.saveToken(token, expiration, this.userEmail, this.userId);
-      this.router.navigate(['/user']);
+      this.router.navigate(['/user'])
+      console.log(res.message);
     }
   }
 

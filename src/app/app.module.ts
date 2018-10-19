@@ -15,13 +15,15 @@ import {  MatTableModule,
           MatPaginatorModule,
           MatSortModule,
           MatProgressSpinnerModule } from '@angular/material';
-import {AuthInterceptor} from './servers/account/auth-interceptor';
+import { AuthInterceptor} from './servers/account/auth-interceptor';
 import { OrderTableComponent } from './order-table/order-table.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { HotelComponent } from './hotel/hotel.component';
 import { UserphotoComponent } from './user/userphoto/userphoto.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
-import {ErrorInterceptor} from './error-interceptor';
+import { ErrorInterceptor} from './error-interceptor';
+import { SignupComponent} from './auth/signup/signup.component';
+import { LoginComponent} from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import {ErrorInterceptor} from './error-interceptor';
     routingComponent,
     MessagesComponent,
     SearchComponent,
+    SignupComponent,
+    LoginComponent,
     OrderTableComponent,
     RoomsComponent,
     HotelComponent,

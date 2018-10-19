@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private authStatus: Subscription;
   loginForm: FormGroup;
   errorMsg: String = '';
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   constructor(private router: Router,
               private formbuilder: FormBuilder,
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loginForm = this.formbuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       password: ['', [Validators.required]]
     });
     this.authStatus = this.accountservice

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const backEnd = require('../config/backEnv');
 
 module.exports = class UserController {
   static registration(req, res) {
@@ -20,7 +21,7 @@ module.exports = class UserController {
         user.save()
           .then(result => {
             userId = result._id;
-            const token = jwt.sign({email: req.body.email}, 'secret', {expiresIn: "1h"});
+            const token = jwt.sign({email: req.body.email}, backEnd.secrete, {expiresIn: backEnd.expireIn});
             res.status(201).json({
                 message: 'User created!',
                 token: token,
@@ -76,24 +77,5 @@ module.exports = class UserController {
           error: err
         })
       })
-  }
-
-  static authentication( req, res, next) {
-    const headerExists = req.headers.authentication;
-    if (headerExists) {
-      // TODO maybe not need to split
-      const token = req.headers.authorization.split(' ')[1];
-      jwt.verify(token, 'secrete', (error, decoded) => {
-        if (error) {
-          console.log(error);
-          res.status(401).json('Unauthorized');
-        } else {
-          req.user = decoded.username;
-          next();
-        }
-      });
-    } else {
-      res.status(403).json('No token provided');
-    }
   }
 };
