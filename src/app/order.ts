@@ -1,7 +1,7 @@
 export class Order {
   // the order class
   _id: String;
-  room : string;
+  room: string;
   user: String;
   fromDate: Date;
   toDate: Date;
