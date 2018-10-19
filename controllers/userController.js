@@ -64,7 +64,7 @@ module.exports = class UserController {
             message: "password error !"
           });
         }
-        const token = jwt.sign({email: email}, 'secret', {expiresIn: "1h"});
+        const token = jwt.sign({email: email}, backEnd.secrete, {expiresIn: "1h"});
         res.status(200).json({
           message: 'success',
           expiresIn: 3600,
