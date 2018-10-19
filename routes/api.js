@@ -1,5 +1,4 @@
 
-// import {post} from 'selenium-webdriver/http';
 const UserController = require('../controllers/userController');
 const express = require('express');
 const router = express.Router();

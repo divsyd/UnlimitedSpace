@@ -63,7 +63,6 @@ export class RoomDetailComponent implements OnInit {
       return;
     }
     const order = new Order();
-    // order.roomInstance = this.roomDetail._id;
     order.room = this.roomDetail._id;
     order.user = localStorage.getItem('userId');
     order.fromDate = this.daterangepickerModel[0];
