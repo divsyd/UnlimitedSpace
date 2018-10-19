@@ -1,6 +1,5 @@
 <div class="container-fluid" *ngIf="roomDetail">
   <h4>{{roomDetail.name}} Details</h4>
-  <!--<div><span>id: </span>{{roomDetail._id}}</div>-->
   <div><span>hotel: </span>{{roomDetail.hotel.name}}</div>
   <div><span>address: </span>{{roomDetail.hotel.address}}</div>
   <div><span>city: </span>{{roomDetail.hotel.city}}</div>
@@ -28,8 +27,6 @@
         <small class="text-danger" *ngIf="dataRange.errors?.required">Data range is required</small>
       </div>
     </div>
-    <!--{{reserveForm.valid | json}}-->
-    <!--{{reserveForm.value | json}}-->
     <button class="btn btn-primary" [disabled]="!reserveForm.valid">Reserve</button>
     <button class="btn btn-secondary ml-2" (click)="goBack()">Back</button>
   </form>

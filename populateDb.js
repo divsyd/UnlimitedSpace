@@ -29,24 +29,6 @@ mongoose.Promise = global.Promise;
 // var db = mongoose.connection;
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// Clear current collections
-// db.
-// User.remove({}, function (err) {
-//   console.log('User collection removed')
-// });
-// RoomInstance.remove({}, function (err) {
-//   console.log('RoomInstance collection removed')
-// });
-// Room.remove({}, function (err) {
-//   console.log('Room collection removed')
-// });
-// Hotel.remove({}, function (err) {
-//   console.log('Hotel collection removed')
-// });
-// Order.remove({}, function (err) {
-//   console.log('Order collection removed')
-// });
-
 
 var users = [];
 var orders = [];
@@ -233,8 +215,6 @@ async.series([
     }
     else {
       console.log('No error on populate');
-      // var size = db.collections.hotels.find();
-      // console.log(size);
 
     }
     // All done, disconnect from database

@@ -36,7 +36,6 @@ export class RoomService {
     return this.http.get<Room[]>(url)
       .pipe(
         catchError(this.handleError('getRooms', [])),
-        // tap(x => console.log('getRooms', x))
       );
   }
 
@@ -47,7 +46,6 @@ export class RoomService {
     return this.http.get<Room>(url)
       .pipe(
         catchError(this.handleError<Room>(`getRoom id=${id}`)),
-        // tap(x => console.log('getRoom', x))
       );
   }
 
