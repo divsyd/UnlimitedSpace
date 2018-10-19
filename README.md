@@ -88,5 +88,12 @@ Source repository for [https://unlimitedspace.azurewebsites.net/](https://unlimi
 ### Cloud server links
 
 - main site: [https://unlimitedspace.azurewebsites.net/](https://unlimitedspace.azurewebsites.net/)
-- api get all rooms: [https://unlimitedspace.azurewebsites.net/api/rooms](https://unlimitedspace.azurewebsites.net/api/rooms)
-- api get room by id: [https://unlimitedspace.azurewebsites.net/api/rooms/{roomid}](https://unlimitedspace.azurewebsites.net/api/rooms/{roomid})
+- API - https://unlimitedspace.azurewebsites.net/api
+	- Hotel API
+		- Get all hotels - /hotel
+		- Get hotel by id - /hotel/id
+	- Room API
+		- Get all rooms - https://unlimitedspace.azurewebsites.net/api/room
+		- Get room by id - https://unlimitedspace.azurewebsites.net/api/room/id
+		- Get room by hotel - https://unlimitedspace.azurewebsites.net/api/room&hotel=hotelId
+		- Get room by hotel, sort by price and limit to two results - https://unlimitedspace.azurewebsites.net/api/room&hotel=hotelId&&sort=1&limit=1
