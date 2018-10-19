@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgMode
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponent } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { MessagesComponent } from './messages/messages.component';
 import { SearchComponent } from './search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,7 +27,6 @@ import { LoginComponent} from './auth/login/login.component';
   declarations: [
     AppComponent,
     routingComponent,
-    MessagesComponent,
     SearchComponent,
     SignupComponent,
     LoginComponent,

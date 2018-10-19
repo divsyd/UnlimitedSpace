@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountServiceService} from '../../servers/account/account-service.service';
 import {validate} from 'codelyzer/walkerFactory/walkerFn';
 import {Subscription} from 'rxjs';
-
+// component for log  user
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +13,6 @@ import {Subscription} from 'rxjs';
 export class LoginComponent implements OnInit, OnDestroy {
   private authStatus: Subscription;
   loginForm: FormGroup;
-  errorMsg: String = '';
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   constructor(private router: Router,
@@ -32,16 +31,17 @@ export class LoginComponent implements OnInit, OnDestroy {
         error => {});
   }
 
-// direct to an user
+// back to home page
   btnClick(): void {
-    this.router.navigateByUrl('/');
+    this.router.navigate(['/']);
 
   }
-
+// post data to back end
   loginUser(): void {
     this.accountservice.login(this.loginForm.value);
   }
 
+  // destroy unused subscription
   ngOnDestroy() {
     this.authStatus.unsubscribe();
   }

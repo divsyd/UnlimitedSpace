@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { User } from '../../../../models/user';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -11,7 +8,7 @@ import { environment } from './../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-
+// the class has functions related to users
 export class AccountServiceService {
   private token: string;
   private userEmail: string;
@@ -22,18 +19,19 @@ export class AccountServiceService {
   constructor(private http: HttpClient,
     private router: Router) { }
 
+    // get user token
   getToken() {
     return this.token;
   }
-
+  // check user status
   getIsAuth() {
     return this.isAuthenticated;
   }
-
+  // get a user status subscription
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
-
+  // checking user sataus
   autoAuthUser() {
     const authInformation = this.getLoginData();
     if (authInformation) {
@@ -43,9 +41,14 @@ export class AccountServiceService {
         this.token = authInformation.token;
         this.isAuthenticated = true;
         this.authStatusListener.next(true);
-      } // TODO remove get login after 1h
+      } else {
+        this.token = null;
+        this.isAuthenticated = false;
+        this.authStatusListener.next(false);
+      }
     }
   }
+  // using http post function to verify user information
   login(user: User) {
     this.http.post<{ token: string }>(this.BASE_URL + 'login', user)
       .subscribe(response => {
@@ -54,7 +57,7 @@ export class AccountServiceService {
         this.authStatusListener.next(false);
       });
   }
-  // Signup function
+  // Signup users by using http post
   signup(user: User) {
     this.http.post<{ token: string }>(this.BASE_URL + 'signup', user)
       .subscribe(response => {
@@ -63,7 +66,7 @@ export class AccountServiceService {
         this.authStatusListener.next(false);
       });
   }
-
+// the function to handle the response from server
   duplicated(res) {
     const token = res.token;
     this.token = token;
@@ -76,19 +79,20 @@ export class AccountServiceService {
       this.userEmail = res.userEmail;
       this.userId = res.userId;
       this.saveToken(token, expiration, this.userEmail, this.userId);
-      this.router.navigate(['/user'])
-      console.log(res.message);
+      this.router.navigate(['/user']);
     }
   }
 
+  // logout to clean all stored information
   logout() {
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
-    this.clearToken();
+    this.cleanToken();
     this.router.navigate(['']);
   }
 
+  // saving token to the localStorage
   private saveToken(token: string,
     expirationDate: Date,
     userEmail: string,
@@ -98,14 +102,14 @@ export class AccountServiceService {
     localStorage.setItem('userEmail', userEmail);
     localStorage.setItem('userId', userId);
   }
-
-  private clearToken() {
+  // clear stored token
+  private cleanToken() {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userEmail');
     localStorage.removeItem('userId');
   }
-
+// get users' login information token and expiration data
   private getLoginData() {
     const token = localStorage.getItem('token');
     const expiration = localStorage.getItem('expiration');

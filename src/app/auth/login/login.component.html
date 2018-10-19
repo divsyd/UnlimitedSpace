@@ -23,6 +23,11 @@
               type="submit"
               [disabled]="this.loginForm.invalid"
       >Log in</button>
+    <button mat-raised-button
+            color="warn"
+            type="cancel"
+            (click)="btnClick()"
+    >Cancel</button>
   </form>
 </mat-card>
 
