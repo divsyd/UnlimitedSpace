@@ -67,8 +67,7 @@ export class RoomDetailComponent implements OnInit {
     order.user = localStorage.getItem('userId');
     order.fromDate = this.daterangepickerModel[0];
     order.toDate = this.daterangepickerModel[1];
-    order.numNights = this.numOfNight.value;
-
+    order.numNights = this.daterangepickerModel[1].getDate() - this.daterangepickerModel[0].getDate();
     this.orderService.createOrder(order).subscribe(successCode => {
       alert('create order successfully');
     });
