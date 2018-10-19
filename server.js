@@ -12,7 +12,6 @@ const morgan = require('morgan');
 
 // Get our API routes
 const api = require('./routes/api');
-const roomInstanceApi = require('./routes/roomInstance');
 
 // Used for logging (Standard Apache combined log output). Example format:
 // :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
@@ -38,9 +37,9 @@ app.use((req, res, next) => {
   );
   next();
 });
+
 // Set our api routes
 app.use('/api', api);
-app.use('/api/roominstance', roomInstanceApi);
 
 app.use(cors());
 app.use(express.static('./dist/UnlimitedSpace'));
