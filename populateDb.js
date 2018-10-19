@@ -13,7 +13,6 @@ if (!userArgs[0]) {
 var async = require('async');
 var Hotel = require('./models/hotel');
 var Room = require('./models/room');
-var RoomInstance = require('./models/roominstance');
 var Order = require('./models/order');
 var User = require('./models/user');
 
@@ -50,7 +49,6 @@ mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection 
 
 
 var users = [];
-var roomInstances = [];
 var orders = [];
 
 function userCreate(email, username, password, date_of_birth, phone, cb) {
@@ -210,51 +208,7 @@ function createUsers(cb) {
     cb);
 }
 
-// room, status, reservedUntil, cb
-function createRoomInstances(cb) {
-  async.parallel([
-    function (callback) {
-      roomInstanceCreate(rooms[0], "Available", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[0], "Maintenance", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[1], "Reserved", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[1], "Available", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[2], "Available", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[2], "Reserved", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[3], "Available", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[3], "Available", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[4], "Available", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[5], "Available", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[6], "Available", callback);
-    },
-    function (callback) {
-      roomInstanceCreate(rooms[7], "Available", callback);
-    },
-  ],
-    // optional callback
-    cb);
-}
-
-// roomInstance, user, numNights
+// room, user, numNights
 function createOrders(cb) {
   async.parallel([
     function (callback) {
@@ -270,7 +224,6 @@ function createOrders(cb) {
 
 async.series([
   createUsers,
-  createRoomInstances,
   createOrders
 ],
   // Optional callback

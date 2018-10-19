@@ -3,7 +3,6 @@
 const UserController = require('../controllers/userController');
 const express = require('express');
 const router = express.Router();
-const RoomInstance = require('../models/roominstance');
 const HotelController = require('../controllers/HotelController');
 const RoomController = require('../controllers/RoomController');
 const OrderController = require('../controllers/orderController');
@@ -12,19 +11,6 @@ const checkAuth = require('../middleware/check-auth');
 /* GET api listing. */
 router.get('/', (req, res) => {
     res.send('api works');
-});
-
-// RoomInstance
-router.get('/roominstance', (req, res) => {
-
-    // get all rooms
-    RoomInstance.find({})
-        .then(roomInstance => {
-            res.status(200).json(roomInstance);
-        })
-        .catch(error => {
-            res.status(500).send(error);
-        });
 });
 
 // User api
