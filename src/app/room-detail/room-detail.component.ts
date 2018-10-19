@@ -32,8 +32,9 @@ export class RoomDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.reserveForm = this.formBuilder.group({
-      dataRange: ['', Validators.required],
-      numOfNight: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
+      dataRange: ['', Validators.required]
+      // dataRange: ['', Validators.required],
+      // numOfNight: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
     });
 
     const roomId = this.route.snapshot.paramMap.get('id');

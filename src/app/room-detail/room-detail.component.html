@@ -8,7 +8,7 @@
   <div><span>bedrooms: </span>{{roomDetail.bedrooms}}</div>
 
   <form [formGroup]="reserveForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+    <!--<div class="form-group">
       <label>Number of Nights</label>
       <input type="text" [class.is-invalid]="numOfNight.invalid && numOfNight.touched" formControlName="numOfNight"
         class="form-control" placeholder="Please enter number of nights">
@@ -16,7 +16,7 @@
         <small class="text-danger" *ngIf="numOfNight.errors?.required">Number of night is required</small>
         <small class="text-danger" *ngIf="numOfNight.errors?.pattern">Number of night must be number</small>
       </div>
-    </div>
+    </div>-->
 
     <div class="form-group">
       <label>Date Range</label>
