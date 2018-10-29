@@ -32,8 +32,7 @@ export class RoomDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.reserveForm = this.formBuilder.group({
-      dataRange: ['', Validators.required],
-      numOfNight: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
+      dataRange: ['', Validators.required]
     });
 
     const roomId = this.route.snapshot.paramMap.get('id');
@@ -45,9 +44,6 @@ export class RoomDetailComponent implements OnInit {
     });
   }
 
-  get numOfNight() {
-    return this.reserveForm.get('numOfNight');
-  }
 
   get dataRange() {
     return this.reserveForm.get('dataRange');
@@ -67,8 +63,7 @@ export class RoomDetailComponent implements OnInit {
     order.user = localStorage.getItem('userId');
     order.fromDate = this.daterangepickerModel[0];
     order.toDate = this.daterangepickerModel[1];
-    order.numNights = this.numOfNight.value;
-
+    order.numNights = this.daterangepickerModel[1].getDate() - this.daterangepickerModel[0].getDate();
     this.orderService.createOrder(order).subscribe(successCode => {
       alert('create order successfully');
     });

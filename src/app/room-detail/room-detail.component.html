@@ -9,16 +9,6 @@
 
   <form [formGroup]="reserveForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label>Number of Nights</label>
-      <input type="text" [class.is-invalid]="numOfNight.invalid && numOfNight.touched" formControlName="numOfNight"
-        class="form-control" placeholder="Please enter number of nights">
-      <div *ngIf="numOfNight.invalid && numOfNight.touched">
-        <small class="text-danger" *ngIf="numOfNight.errors?.required">Number of night is required</small>
-        <small class="text-danger" *ngIf="numOfNight.errors?.pattern">Number of night must be number</small>
-      </div>
-    </div>
-
-    <div class="form-group">
       <label>Date Range</label>
       <input type="text" placeholder="please select your date range" class="form-control" [class.is-invalid]="dataRange.invalid && dataRange.touched"
         formControlName="dataRange" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [(ngModel)]="daterangepickerModel"
