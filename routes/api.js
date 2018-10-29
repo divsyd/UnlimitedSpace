@@ -2,8 +2,8 @@
 const UserController = require('../controllers/userController');
 const express = require('express');
 const router = express.Router();
-const HotelController = require('../controllers/HotelController');
-const RoomController = require('../controllers/RoomController');
+const HotelController = require('../controllers/hotelController');
+const RoomController = require('../controllers/roomController');
 const OrderController = require('../controllers/orderController');
 const checkAuth = require('../middleware/check-auth');
 
